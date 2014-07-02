@@ -4,6 +4,8 @@ Created on Jun 26, 2014
 @author: dbhage
 '''
 
+import re
+
 def find_authors(authors, article_content, dictionary, lnaofnp_func, lnp_func):
     '''
     Find if author in article 
@@ -19,7 +21,7 @@ def find_authors(authors, article_content, dictionary, lnaofnp_func, lnp_func):
     
     article_content = article_content.lower()
     
-    matches = []
+    searches = []
     
     for author in authors:
         last_name_in_dictionary = False
@@ -30,12 +32,12 @@ def find_authors(authors, article_content, dictionary, lnaofnp_func, lnp_func):
         
         if last_name_in_dictionary:
             if lnaofnp_func(author, article_content):
-                matches.append(author)
+                searches.append(author)
         else:
             if lnp_func(author, article_content):
-                matches.append(author)
+                searches.append(author)
     
-    return matches
+    return searches
 
 def last_name_present(author, article_content):
     '''
@@ -49,7 +51,7 @@ def last_name_present(author, article_content):
 
     count = 0
     for last_name in author.last_names:
-        if last_name in article_content:
+        if re.search(r'\b' + re.escape(last_name) + r'\b', article_content):
             count += 1
     return count == len(author.last_names)
 
@@ -66,13 +68,13 @@ def last_name_and_one_first_name_present(author, article_content):
     count_last = 0
     
     for last_name in author.last_names:
-        if last_name in article_content:
+        if re.search(r'\b' + re.escape(last_name) + r'\b', article_content):
             count_last += 1
             
     one_first_name_present = False
 
     for first_name in author.first_names:
-        if first_name in article_content:
+        if re.search(r'\b' + re.escape(first_name) + r'\b', article_content):
             one_first_name_present = True
     
     return count_last == len(author.last_names) and one_first_name_present
@@ -90,13 +92,13 @@ def full_name_present(author, article_content):
     count_last = 0
     
     for last_name in author.last_names:
-        if last_name in article_content:
+        if re.search(r'\b' + re.escape(last_name) + r'\b', article_content):
             count_last += 1
             
     count_first = 0
 
     for first_name in author.first_names:
-        if first_name in article_content:
+        if re.search(r'\b' + re.escape(first_name) + r'\b', article_content):
             count_first += 1
     
     return count_last == len(author.last_names) and count_first == len(author.first_names)   
