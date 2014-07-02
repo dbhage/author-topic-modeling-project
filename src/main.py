@@ -6,9 +6,9 @@ Created on Jun 24, 2014
 
 from mallet.mallet import import_data, train
 from util.io import get_lines
-from parser.composition import parse_compositions
-from parser.key import parse_keys
-from parser.author_article import find_authors
+from table.composition import parse_compositions
+from table.key import parse_keys
+from table.author_article import find_authors
 from author.author import get_authors
 from celex.factory.factory import build_celex
 
@@ -50,7 +50,7 @@ articles_folder = "/home/dbhage/piperlab/JSTORAllLang&Lit1950-2008/JSTORData-09.
 lines = []
 
 celex = build_celex("/home/dbhage/Dropbox/PiperLabDeanSharedFolder/celex2/", 0, 0)
-
+'''
 for article in sorted(os.listdir(articles_folder))[:100]:
     
     article_content = open(articles_folder + article).read()
@@ -68,3 +68,11 @@ for article in sorted(os.listdir(articles_folder))[:100]:
 with open("/home/dbhage/piperlab/author_article_table.csv", 'w') as fd:
     for line in lines:
         fd.write(line + '\n')
+'''
+
+from table.author_topic import author_topic_table
+
+table = author_topic_table(compositions_file, articles_folder, authors, celex)
+
+for element in table:
+    print (element)
