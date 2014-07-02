@@ -4,7 +4,78 @@ Created on Jun 26, 2014
 @author: dbhage
 '''
 
-import re
+import re, os, sys
+from author.author import Author
+
+def get_author_articles(articles_folder, authors, dictionary, num=-1):
+    '''
+    Get author-article table in the form of a dict
+    @param articles_folder: folder containing articles in text files
+    @param authors: list of Author objects
+    @param dictionary: english dictionary, type: dict
+    @param num: int for number of files. if < 0 or > no of articles in article_folder, all article files are used
+    @return: dict with article name as key and list of authors present in that article as value
+    '''
+    file_names = sorted(os.listdir(articles_folder))
+
+    if num < 0 or num >= len(file_names):
+        num = len(file_names)
+    
+    author_articles = dict()
+    
+    for article in file_names[:num]:
+        article_content = open(articles_folder + article).read()
+        auths = find_authors(authors, article_content, dictionary, last_name_and_one_first_name_present, last_name_present)
+        author_articles[article] = auths
+    
+    return author_articles
+
+def load_author_article_from_file(csv_file_name):
+    '''
+    Load author-article table from csv file in a dict
+    @param csv_file_name: csv file containing article names and authors in that article
+    '''
+    author_articles = dict()
+    
+    with open(csv_file_name, 'r') as fd:
+        lines = fd.readlines()
+        
+        for line in lines:
+            line = line.split(',')
+            article = line[0]
+            
+            authors = []
+            
+            if len(line) > 1:
+                for i in range(1, len(line)-1):
+                    full_name = line[i].split()
+                    author = Author()
+                    author.add_last_name(full_name[0])
+                    author.add_first_names(full_name[1:])
+                    authors.append(author)
+                
+            author_articles[article] = authors
+    
+    return author_articles
+
+def save_author_articles_to_file(csv_file_name, aa_table):
+    '''
+    Save author-article table to csv file
+    @param aa_table: author-article table
+    @param csv_file_name: csv file to write to
+    '''
+    try:
+        with open(csv_file_name, 'w') as fd:
+            for (k,v) in aa_table.items():
+                fd.write(k)
+                fd.write(',')
+                for i in range(0, len(v)):
+                    fd.write(str(v[i]).replace(',', ' '))
+                    if i != len(v) - 1:
+                        fd.write(',')
+                fd.write('\n')    
+    except IOError:
+        print >> sys.stderr, "Erro while saving author articles table to csv file."
 
 def find_authors(authors, article_content, dictionary, lnaofnp_func, lnp_func):
     '''
@@ -21,7 +92,7 @@ def find_authors(authors, article_content, dictionary, lnaofnp_func, lnp_func):
     
     article_content = article_content.lower()
     
-    searches = []
+    matches = []
     
     for author in authors:
         last_name_in_dictionary = False
@@ -32,12 +103,12 @@ def find_authors(authors, article_content, dictionary, lnaofnp_func, lnp_func):
         
         if last_name_in_dictionary:
             if lnaofnp_func(author, article_content):
-                searches.append(author)
+                matches.append(author)
         else:
             if lnp_func(author, article_content):
-                searches.append(author)
+                matches.append(author)
     
-    return searches
+    return matches
 
 def last_name_present(author, article_content):
     '''
