@@ -19,8 +19,7 @@ def author_topic_table(compositions, author_articles):
     for article in compositions.keys():
         for author in author_articles[article]:
             author_topic = AuthorTopic(author, compositions[article].main_topic)
-            if author_topic not in author_topics:
-                author_topics.append(author_topic)
+            author_topics.append(author_topic)
     
     return author_topics
 
