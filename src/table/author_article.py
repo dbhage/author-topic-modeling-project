@@ -85,7 +85,7 @@ def find_authors(authors, article_content, dictionary, lnaofnp_func, lnp_func):
     @param dictionary: dictionary of words in the form of a list of dict or Celex object.
     @param lnaofnp_func: last name and only one first name present function
     @param lnp_func: last name present function
-    @return: list of authors first_name_found in article_content
+    @return: list of authors found in article_content
     '''
     if authors is None or authors == [] or article_content is None or article_content == "" or dictionary is None:
         return []

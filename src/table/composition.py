@@ -21,6 +21,9 @@ def parse_compositions(lines):
     Get compositions objects from a file
     @return: dict with document name as key and Composition object as value
     '''
+    if lines is None or lines == []:
+        return None
+    
     compositions = dict()
 
     for line in lines[1:]:
