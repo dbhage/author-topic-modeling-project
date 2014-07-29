@@ -19,11 +19,17 @@ from tabletest.author_article_test.test_author_article_lnaofnp import TestAuthor
 from tabletest.author_article_test.test_author_article_fnp import TestAuthorArticleFNP
 from tabletest.author_article_test.test_find_authors import TestAuthorArticleFindAuthor
 
+from measurestest.anr_test.test_article_author_content_add_mention import TestArticleAuthorContentAddMention
+from measurestest.anr_test.test_article_author_content_constructor import TestArticleAuthorContentConstructor
+from measurestest.anr_test.test_article_author_content_get_author_list import TestArticleAuthorContentGetAuthorList
+from measurestest.anr_test.test_get_validated_data import TestGetValidatedData
+
 def suite():
     suite = unittest.TestSuite()
     suite.addTests([TestFindDotPattern(), TestFindUpperLowersPattern(), TestExtractAuthorNames(), TestGetAuthors()])
     suite.addTests([TestCitationSetPubDate(), TestGetCitation()])
     suite.addTests([TestAuthorArticleFindAuthor(), TestAuthorArticleFNP(), TestAuthorArticleLNAOFNP(), TestAuthorArticleLNOP()])
+    suite.addTests([TestArticleAuthorContentAddMention(), TestArticleAuthorContentConstructor(), TestArticleAuthorContentGetAuthorList(), TestGetValidatedData()])
     return suite
 
 if __name__=="__main__":

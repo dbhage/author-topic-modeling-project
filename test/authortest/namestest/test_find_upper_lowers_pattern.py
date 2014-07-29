@@ -54,6 +54,15 @@ class TestFindUpperLowersPattern(unittest.TestCase):
         actual = find_upper_lowers_pattern(text)
         expected = []
         self.assertEquals(expected, actual, "Expected: " + str(expected) + " Actual: " + str(actual))
+    
+    def test_case6(self):
+        '''
+        TC6: Valid case: "Twain"
+        '''
+        text = " Twain"
+        actual = find_upper_lowers_pattern(text)
+        expected = ["Twain"]
+        self.assertEquals(expected, actual, "Expected: " + str(expected) + " Actual: " + str(actual))
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.test_case1']
