@@ -7,12 +7,12 @@ Created on Jun 26, 2014
 import re, os, sys
 from author.author import Author
 
-def get_author_articles(articles_folder, authors, dictionary, num=-1):
+def get_author_articles(articles_folder, authors, last_name_only_list, num=-1):
     '''
     Get author-article table in the form of a dict
     @param articles_folder: folder containing articles in text files
     @param authors: list of Author objects
-    @param dictionary: english dictionary, type: dict
+    @param last_name_only_list: list of authors for whom we can only search the last name
     @param num: int for number of files. if < 0 or > no of articles in article_folder, all article files are used
     @return: dict with article name as key and list of authors present in that article as value
     '''
@@ -25,7 +25,7 @@ def get_author_articles(articles_folder, authors, dictionary, num=-1):
     
     for article in file_names[:num]:
         article_content = open(articles_folder + article).read()
-        auths = find_authors(authors, article_content, dictionary, last_name_and_one_first_name_present, last_name_present)
+        auths = find_authors(authors, article_content, last_name_and_one_first_name_present, last_name_present, last_name_only_list)
         author_articles[article] = auths
     
     return author_articles
@@ -34,6 +34,7 @@ def load_author_article_from_file(csv_file_name):
     '''
     Load author-article table from csv file in a dict
     @param csv_file_name: csv file containing article names and authors in that article
+    @return: dict with article id as key and list of Author objects as value
     '''
     author_articles = dict()
     
@@ -77,17 +78,16 @@ def save_author_articles_to_file(csv_file_name, aa_table):
     except IOError:
         print >> sys.stderr, "Erro while saving author articles table to csv file."
 
-def find_authors(authors, article_content, dictionary, lnaofnp_func, lnp_func):
+def find_authors(authors, article_content, lnaofnp_func, lnp_func, last_name_only_list):
     '''
     Find if author in article 
     @param authors: list of authors
     @param article_content: content of article in which we want to find author
-    @param dictionary: dictionary of words in the form of a list of dict or Celex object.
     @param lnaofnp_func: last name and only one first name present function
     @param lnp_func: last name present function
     @return: list of authors found in article_content
     '''
-    if authors is None or authors == [] or article_content is None or article_content == "" or dictionary is None:
+    if authors is None or authors == [] or article_content is None or article_content == "":
         return []
     
     article_content = article_content.lower()
@@ -95,13 +95,13 @@ def find_authors(authors, article_content, dictionary, lnaofnp_func, lnp_func):
     matches = []
     
     for author in authors:
-        last_name_in_dictionary = False
+        last_name_in_list = False
         
         for last_name in author.last_names:
-            if last_name in dictionary:
-                last_name_in_dictionary = True
+            if last_name in last_name_only_list:
+                last_name_in_list = True
         
-        if last_name_in_dictionary:
+        if not last_name_in_list:
             if lnaofnp_func(author, article_content):
                 matches.append(author)
         else:

@@ -62,7 +62,7 @@ class Author(object):
             self.last_names += map(to_lower, last_names)
     
     def __str__(self):
-        return  ' '.join(self.last_names) + " " + ' '.join(self.first_names)
+        return  ' '.join(self.first_names) + " " + ' '.join(self.last_names)
     
     def __eq__(self, other):
         return other.first_names == self.first_names and other.last_names == self.last_names

@@ -38,7 +38,7 @@ def find_dot_pattern(text):
 
 def find_upper_lowers_pattern(text):
     '''
-    Find names starting with an upper case lette followed by lower case letters
+    Find names starting with an upper case letter followed by lower case letters
     @param text: the text in which to find the pattern
     @return: list of strings with the names found, [] if no names found
     '''
