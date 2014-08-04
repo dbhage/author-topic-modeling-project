@@ -66,3 +66,6 @@ class Author(object):
     
     def __eq__(self, other):
         return other.first_names == self.first_names and other.last_names == self.last_names
+    
+    def __hash__(self):
+        return hash((''.join(self.first_names), ''.join(self.last_names)))
