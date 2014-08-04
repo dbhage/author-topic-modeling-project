@@ -10,6 +10,10 @@ from anr_test.test_article_author_content_get_author_list import TestArticleAuth
 
 from anr_test.test_get_validated_data import TestGetValidatedData
 
+from entropytest.test_formula_inside_sum import TestFormulaInsideSum
+from entropytest.test_no_docs_with_topics import TestNoOfDocsWithTopics
+from entropytest.test_entropy_summation import TestEntropySummation
+
 import unittest
 
 def suite():
@@ -17,7 +21,10 @@ def suite():
     test_suite.addTests([TestArticleAuthorContentAddMention(),
                          TestArticleAuthorContentConstructor(),
                          TestArticleAuthorContentGetAuthorList(),
-                         TestGetValidatedData()])
+                         TestGetValidatedData(),
+                         TestFormulaInsideSum(),
+                         TestNoOfDocsWithTopics(),
+                         TestEntropySummation()])
 
 if __name__ == '__main__':
     unittest.runner.TextTestRunner(suite()).run()
