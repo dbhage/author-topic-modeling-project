@@ -26,6 +26,8 @@ from measurestest.entropytest.test_formula_inside_sum import TestFormulaInsideSu
 from measurestest.entropytest.test_no_docs_with_topics import TestNoOfDocsWithTopics
 from measurestest.entropytest.test_entropy_summation import TestEntropySummation
 
+from tabletest.author_topic_test.test_author_topic_class import TestAuthorTopicClass
+
 def suite():
     suite = unittest.TestSuite()
     suite.addTests([TestFindDotPattern(), TestFindUpperLowersPattern(), TestExtractAuthorNames(), 
@@ -33,7 +35,8 @@ def suite():
                     TestAuthorArticleFNP(), TestAuthorArticleLNAOFNP(), TestAuthorArticleLNOP(),
                     TestArticleAuthorContentAddMention(), TestArticleAuthorContentConstructor(), 
                     TestArticleAuthorContentGetAuthorList(), TestGetValidatedData(), TestFormulaInsideSum(), 
-                    TestNoOfDocsWithTopics(), TestEntropySummation()])
+                    TestNoOfDocsWithTopics(), TestEntropySummation(), TestAuthorTopicClass()])
+
     return suite
 
 if __name__=="__main__":
