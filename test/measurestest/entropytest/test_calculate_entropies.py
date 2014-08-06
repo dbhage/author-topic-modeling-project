@@ -6,7 +6,7 @@ Created on Aug 3, 2014
 
 import unittest
 
-class TestCalcuateEntropies(unittest.TestCase):
+class TestCalculateEntropies(unittest.TestCase):
 
     def test_case1(self):
         self.fail("NYI")

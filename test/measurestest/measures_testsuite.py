@@ -14,6 +14,8 @@ from entropytest.test_formula_inside_sum import TestFormulaInsideSum
 from entropytest.test_no_docs_with_topics import TestNoOfDocsWithTopics
 from entropytest.test_entropy_summation import TestEntropySummation
 
+from commontest.test_get_docs_per_author import TestGetDocsPerAuthor
+
 import unittest
 
 def suite():
@@ -24,7 +26,8 @@ def suite():
                          TestGetValidatedData(),
                          TestFormulaInsideSum(),
                          TestNoOfDocsWithTopics(),
-                         TestEntropySummation()])
+                         TestEntropySummation(),
+                         TestGetDocsPerAuthor()])
 
 if __name__ == '__main__':
     unittest.runner.TextTestRunner(suite()).run()

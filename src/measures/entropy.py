@@ -33,6 +33,7 @@ def entropy_summation(auth, topic_list, author_topic_counts, n, formula_inside_s
     @param topic_list: list of topics for auth
     @param author_topic_counts: dict with AuthorTopic objects as keys and counts as values
     @param n: total number of documents for that author
+    @param formula_inside_sum_func: function to calculate the value inside of the summation
     @return: float representing the summation part of the entropy calculation if parameters valid, -1 otherwise
     '''
     if not auth or not topic_list or not author_topic_counts:

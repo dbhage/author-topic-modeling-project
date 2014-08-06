@@ -121,8 +121,8 @@ def save_author_topic_counts_to_file(count_dict, csv_file_name):
             fd.write(str(k.author) + "," + str(k.topic) + "," + str(v) + '\n')
 
 class AuthorTopic(object):
-    def __init__(self, names, topic):
-        self.author = names
+    def __init__(self, author, topic):
+        self.author = author
         self.topic = topic
     
     def __eq__(self, other):
