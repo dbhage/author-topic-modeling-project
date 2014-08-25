@@ -8,13 +8,17 @@ from datetime import date
 import re
 
 def get_citations(lines):
+    '''
+    Get citations list
+    @param lines: lines from citations csv file
+    @return: list of Citation objects
+    '''
     if lines is None or lines == []:
         return []
 
     citations = []
     
     for line in lines:
-        line = line.split(',')
         citation = Citation()
         citation = get_citation(line, citation)
         if citation:

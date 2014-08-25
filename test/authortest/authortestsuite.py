@@ -14,9 +14,19 @@ from authortest.namestest.test_extract_author_names import TestExtractAuthorName
 from authortest.namestest.test_find_dot_pattern import TestFindDotPattern
 from authortest.namestest.test_find_upper_lowers_pattern import TestFindUpperLowersPattern
 
+from authortest.co_occurrence_test.test_list_all_occurrences import TestListAllCoOccurrences
+from authortest.co_occurrence_test.test_get_co_occurrence_dict import TestGetCoOccurrenceDict
+
 def suite():
     suite = unittest.TestSuite()
-    suite.addTests([TestFindDotPattern(), TestFindUpperLowersPattern(), TestExtractAuthorNames(), TestGetAuthors()])
+    
+    suite.addTests([TestFindDotPattern(), 
+                    TestFindUpperLowersPattern(), 
+                    TestExtractAuthorNames(), 
+                    TestGetAuthors(),
+                    TestListAllCoOccurrences(),
+                    TestGetCoOccurrenceDict()])
+
     return suite
 
 if __name__ == "__main__":

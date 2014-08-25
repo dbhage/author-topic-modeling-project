@@ -11,6 +11,9 @@ from authortest.namestest.test_extract_author_names import TestExtractAuthorName
 from authortest.namestest.test_find_dot_pattern import TestFindDotPattern
 from authortest.namestest.test_find_upper_lowers_pattern import TestFindUpperLowersPattern
 
+from authortest.co_occurrence_test.test_list_all_occurrences import TestListAllCoOccurrences
+from authortest.co_occurrence_test.test_get_co_occurrence_dict import TestGetCoOccurrenceDict
+
 from corpustest.jstortest.test_citation import TestCitationSetPubDate
 from corpustest.jstortest.test_get_citation import TestGetCitation
 
@@ -38,7 +41,7 @@ def suite():
                     TestArticleAuthorContentAddMention(), TestArticleAuthorContentConstructor(), 
                     TestArticleAuthorContentGetAuthorList(), TestGetValidatedData(), TestFormulaInsideSum(), 
                     TestNoOfDocsWithTopics(), TestEntropySummation(), TestAuthorTopicClass(),
-                    TestGetDocsPerAuthor()])
+                    TestGetDocsPerAuthor(), TestListAllCoOccurrences(), TestGetCoOccurrenceDict()])
 
     return suite
 
