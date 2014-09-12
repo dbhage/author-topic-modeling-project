@@ -7,7 +7,7 @@ Created on Jun 26, 2014
 import re, os, sys
 from author.author import Author
 
-def get_author_articles(articles_folder, authors, last_name_only_list, num=-1):
+def get_author_articles(articles_folder, authors, last_name_only_list, bigrams=False):
     '''
     Get author-article table in the form of a dict
     @param articles_folder: folder containing articles in text files
@@ -18,14 +18,16 @@ def get_author_articles(articles_folder, authors, last_name_only_list, num=-1):
     '''
     file_names = sorted(os.listdir(articles_folder))
 
-    if num < 0 or num >= len(file_names):
-        num = len(file_names)
-    
     author_articles = dict()
     
-    for article in file_names[:num]:
+    for article in file_names:
         article_content = open(articles_folder + article).read()
-        auths = find_authors(authors, article_content, last_name_and_one_first_name_present, last_name_present, last_name_only_list)
+        
+        if not bigrams:
+            auths = find_authors(authors, article_content, last_name_and_one_first_name_present, last_name_present, last_name_only_list)
+        else:
+            auths = find_authors(authors, article_content, name_bigram_present, last_name_present, last_name_only_list)
+
         author_articles[article] = auths
     
     return author_articles
@@ -172,4 +174,28 @@ def full_name_present(author, article_content):
         if re.search(r'\b' + re.escape(first_name) + r'\b', article_content):
             count_first += 1
     
-    return count_last == len(author.last_names) and count_first == len(author.first_names)   
+    return count_last == len(author.last_names) and count_first == len(author.first_names)
+
+def name_bigram_present(author, article_content):
+    '''
+    Find an author's name in the article by looking for first name and last name bigram combos
+    @param author: the Author object representing the author whom we want to find the article
+    @param article_content: the string with the article content
+    @return: True if any bigram combos of name present for that particular author is found in the article, False otherwise
+    '''
+    try:
+        bigram_combos = generate_bigram_combos(author)
+    except IndexError:
+        return False
+    
+    for bigram_combo in bigram_combos:
+        if re.search(bigram_combo, article_content):
+            return True
+    
+    return False
+
+def generate_bigram_combos(author):
+    '''
+    @param author: the Author object representing the author whom we want to find the article
+    '''
+    return [author.first_names[0] + ' ' + author.last_names[0]]

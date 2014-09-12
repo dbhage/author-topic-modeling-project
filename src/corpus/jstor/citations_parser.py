@@ -37,7 +37,6 @@ def get_citation(line, citation):
         citation.title = citation_data[2]
         citation.author = citation_data[3]
         citation.journal_title = citation_data[4]
-        citation.volume = int(citation_data[5])
         citation.issue = citation_data[6]
         citation.set_pub_date(citation_data[7])
         citation.page_range = citation_data[8]
