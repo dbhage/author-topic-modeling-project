@@ -14,10 +14,12 @@ def get_node_dict(lines):
         raise ValueError("Lines Invalid")
     
     node_dict = {}
+
     for line in lines:
         if line == lines[0]: continue # first one is header row
         node = parse_node_line(line)
         node_dict[node[0]] = node[1]
+    
     return node_dict
 
 def parse_node_line(line):
@@ -44,22 +46,23 @@ def get_language_sums(node_dict, edge_lines):
     for line in edge_lines:
         if line == edge_lines[0]: continue # skip header row
         edge = parse_edge_line(line) # tup(auth, auth, weight)
-        lang = node_dict[edge[1]]
-        
-        if not edge[0] in lang_sum_dict:
-            lang_sum_dict[edge[0]] = LanguageSum()
-        
-        if lang == "english":
-            lang_sum_dict[edge[0]].conn_eng += 1
-            lang_sum_dict[edge[0]].sum_eng += edge[2]
-        elif lang == "french":
-            lang_sum_dict[edge[0]].conn_fre += 1
-            lang_sum_dict[edge[0]].sum_fre += edge[2]
-        elif lang == "german":
-            lang_sum_dict[edge[0]].conn_ger += 1
-            lang_sum_dict[edge[0]].sum_ger += edge[2]
-        else:
-            raise ValueError("Language undefined")
+
+        for (src_auth, target_lang) in [(edge[0], node_dict[edge[1]]),(edge[1], node_dict[edge[0]])]:        
+
+            if not src_auth in lang_sum_dict:
+                lang_sum_dict[src_auth] = LanguageSum()
+            
+            if target_lang == "english":
+                lang_sum_dict[src_auth].conn_eng += 1
+                lang_sum_dict[src_auth].sum_eng += edge[2]
+            elif target_lang == "french":
+                lang_sum_dict[src_auth].conn_fre += 1
+                lang_sum_dict[src_auth].sum_fre += edge[2]
+            elif target_lang == "german":
+                lang_sum_dict[src_auth].conn_ger += 1
+                lang_sum_dict[src_auth].sum_ger += edge[2]
+            else:
+                raise ValueError("Language undefined:" + target_lang)
     
     return lang_sum_dict
 
@@ -75,9 +78,7 @@ def parse_edge_line(line):
     line = line.replace('\n', '')
     line = line.split(',')
 
-    weight = int(line[5].split('.')[0])
-
-    return (line[0], line[1], weight)
+    return (line[0], line[1], int(line[2]))
 
 class LanguageSum(object):
     def __init__(self):

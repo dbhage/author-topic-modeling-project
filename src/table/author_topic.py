@@ -116,7 +116,7 @@ def save_author_topic_counts_to_file(count_dict, csv_file_name):
     @param csv_file_name: csv file's full path where the author-topic-count table will be stored
     '''
     with open(csv_file_name, 'w') as fd:
-        fd.write("author,topic,count")
+        fd.write("author,topic,count\n")
         for (k,v) in count_dict.items():
             fd.write(str(k.author) + "," + str(k.topic) + "," + str(v) + '\n')
 

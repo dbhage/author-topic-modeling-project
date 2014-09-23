@@ -31,7 +31,7 @@ def get_citation(line, citation):
         return None
     
     try:
-        citation_data = line.split(',')
+        citation_data = line.split('\t')
         citation.id = citation_data[0]
         citation.doi = citation_data[1]
         citation.title = citation_data[2]

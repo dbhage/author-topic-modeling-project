@@ -52,10 +52,12 @@ def load_author_article_from_file(csv_file_name):
             if len(line) > 1:
                 for i in range(1, len(line)-1):
                     full_name = line[i].split()
-                    author = Author()
-                    author.add_last_name(full_name[0])
-                    author.add_first_names(full_name[1:])
-                    authors.append(author)
+                    if full_name:
+                        author = Author()
+                        author.add_last_name(full_name[0])
+                        author.add_first_names(full_name[1:])
+                        if author not in authors:
+                            authors.append(author)
                 
             author_articles[article] = authors
     

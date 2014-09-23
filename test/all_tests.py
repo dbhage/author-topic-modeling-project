@@ -14,8 +14,8 @@ from authortest.namestest.test_find_upper_lowers_pattern import TestFindUpperLow
 from authortest.co_occurrence_test.test_list_all_occurrences import TestListAllCoOccurrences
 from authortest.co_occurrence_test.test_get_co_occurrence_dict import TestGetCoOccurrenceDict
 
-from corpustest.jstortest.test_citation import TestCitationSetPubDate
-from corpustest.jstortest.test_get_citation import TestGetCitation
+#from corpustest.jstortest.test_citation import TestCitationSetPubDate
+#from corpustest.jstortest.test_get_citation import TestGetCitation
 
 from tabletest.author_article_test.test_author_article_lnop import TestAuthorArticleLNOP
 from tabletest.author_article_test.test_author_article_lnaofnp import TestAuthorArticleLNAOFNP
@@ -36,7 +36,7 @@ from tabletest.author_topic_test.test_author_topic_class import TestAuthorTopicC
 def suite():
     suite = unittest.TestSuite()
     suite.addTests([TestFindDotPattern(), TestFindUpperLowersPattern(), TestExtractAuthorNames(), 
-                    TestGetAuthors(), TestCitationSetPubDate(), TestGetCitation(), 
+                    TestGetAuthors(), 
                     TestAuthorArticleFNP(), TestAuthorArticleLNAOFNP(), TestAuthorArticleLNOP(),
                     TestArticleAuthorContentAddMention(), TestArticleAuthorContentConstructor(), 
                     TestArticleAuthorContentGetAuthorList(), TestGetValidatedData(), TestFormulaInsideSum(), 

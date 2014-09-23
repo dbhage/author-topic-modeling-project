@@ -7,10 +7,10 @@ Script to generate author-article table in a csv file
 '''
 
 from author.author import get_authors
-import os, time
 from util.io import get_lines
-from table.author_article import get_author_articles
-from table.author_article import save_author_articles_to_file
+from table.author_article import get_author_articles, save_author_articles_to_file
+
+import os, time
 
 dropbox_folder = "/home/dbhage/Dropbox/PiperLabDeanSharedFolder/"
 bigrams = True # are we using bigrams data or unigrams?

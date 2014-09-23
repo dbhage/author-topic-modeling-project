@@ -11,13 +11,13 @@ import time
 
 print ("Starting:" + str(time.clock()))
 
-main_dir = "/home/dbhage/piperlab/"
+main_dir = "/home/dbhage/Dropbox/PiperLabDeanSharedFolder/TopicModels/Trial 5 - Bigrams/1950-1980/"
 
-node_file = main_dir + "Author_Cooccurrence_Nodelist.csv"
+node_file = main_dir + "Author_Cooccurrence_Nodelist_1950_1980.csv"
 lines = get_lines(node_file)
 node_dict = get_node_dict(lines)
 
-edge_file = main_dir + "Author_Cooccurrence_Edgelist_10Plus_Reduced.csv"
+edge_file = main_dir + "Author_Cooccurrence_Edgelist_Top5_1950_1980.csv"
 lines = get_lines(edge_file)
 
 lang_sums = get_language_sums(node_dict, lines)

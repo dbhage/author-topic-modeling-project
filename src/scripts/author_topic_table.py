@@ -7,31 +7,23 @@ Created on Jul 2, 2014
 from table.author_topic import author_topic_table, save_author_topics_to_file, save_author_topics_to_file_beautify, author_topic_counts, save_author_topic_counts_to_file
 from table.composition import get_compositions
 from table.author_article import load_author_article_from_file
+import time
+from scripts import compositions_file, author_article_csv_file, author_topic_csv_file, author_topic_beautified, author_topic_table_with_counts_csv_file
 
-print ("Starting")
-
-compositions_file = "/home/dbhage/Dropbox/PiperLabDeanSharedFolder/TopicModels/Trial 3/compositions.txt"
-
-csv_file_name = "/home/dbhage/Dropbox/PiperLabDeanSharedFolder/TopicModels/Trial 3/author_articles_small_corpus.csv"
+print ("Starting:" + str(time.clock()))
 
 compositions = get_compositions(compositions_file)
 
-author_articles = load_author_article_from_file(csv_file_name)
+author_articles = load_author_article_from_file(author_article_csv_file)
 
 att = author_topic_table(compositions, author_articles)
 
-csv_file_name = "/home/dbhage/piperlab/author_topic_table.csv"
+save_author_topics_to_file(att, author_topic_csv_file)
 
-save_author_topics_to_file(att, csv_file_name)
-
-text_file_name = "/home/dbhage/piperlab/author_topic_better_representation.txt"
-
-save_author_topics_to_file_beautify(att, text_file_name)
-
-csv_file_name = "/home/dbhage/piperlab/author_topic_table_with_counts.csv"
+save_author_topics_to_file_beautify(att, author_topic_beautified)
 
 count_dict = author_topic_counts(att)
 
-save_author_topic_counts_to_file(count_dict, csv_file_name)
+save_author_topic_counts_to_file(count_dict, author_topic_table_with_counts_csv_file)
 
-print ("Done")
+print ("Done:" + str(time.clock()))
