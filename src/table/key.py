@@ -13,6 +13,7 @@ def parse_keys(lines):
     
     for line in lines:
         key = Key()
+        line = line.replace('\n', '')
         split_line = line.split()
         
         key.topic_no = int(split_line[0])

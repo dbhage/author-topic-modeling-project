@@ -41,26 +41,29 @@ def load_author_article_from_file(csv_file_name):
     author_articles = dict()
     
     with open(csv_file_name, 'r') as fd:
-        lines = fd.readlines()
-        
-        for line in lines:
+        for line in fd:
+            line = line.replace('\n', '')
             line = line.split(',')
-            article = line[0]
+            aid = line[0]
             
             authors = []
             
             if len(line) > 1:
-                for i in range(1, len(line)-1):
-                    full_name = line[i].split()
+                # find authors
+                for i in range(1, len(line)):
+                    full_name = line[i]
+
                     if full_name:
+                        full_name = full_name.split()
                         author = Author()
-                        author.add_last_name(full_name[0])
-                        author.add_first_names(full_name[1:])
-                        if author not in authors:
-                            authors.append(author)
-                
-            author_articles[article] = authors
-    
+                        if len(full_name) > 1:
+                            for j in range(0, len(full_name) - 1):
+                                author.add_first_name(full_name[j])
+                        author.add_last_name(full_name[-1])
+                        authors.append(author)
+            
+            author_articles[aid] = authors
+            
     return author_articles
 
 def save_author_articles_to_file(csv_file_name, aa_table):
@@ -80,7 +83,7 @@ def save_author_articles_to_file(csv_file_name, aa_table):
                         fd.write(',')
                 fd.write('\n')    
     except IOError:
-        print >> sys.stderr, "Erro while saving author articles table to csv file."
+        print >> sys.stderr, "Error while saving author articles table to csv file."
 
 def find_authors(authors, article_content, lnaofnp_func, lnp_func, last_name_only_list):
     '''

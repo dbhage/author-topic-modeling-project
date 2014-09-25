@@ -2,6 +2,8 @@
 Created on Jul 12, 2014
 
 @author: dbhage
+
+Main Test Suite
 '''
 
 import unittest
@@ -13,9 +15,6 @@ from authortest.namestest.test_find_upper_lowers_pattern import TestFindUpperLow
 
 from authortest.co_occurrence_test.test_list_all_occurrences import TestListAllCoOccurrences
 from authortest.co_occurrence_test.test_get_co_occurrence_dict import TestGetCoOccurrenceDict
-
-#from corpustest.jstortest.test_citation import TestCitationSetPubDate
-#from corpustest.jstortest.test_get_citation import TestGetCitation
 
 from tabletest.author_article_test.test_author_article_lnop import TestAuthorArticleLNOP
 from tabletest.author_article_test.test_author_article_lnaofnp import TestAuthorArticleLNAOFNP

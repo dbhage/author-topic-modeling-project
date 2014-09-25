@@ -30,6 +30,7 @@ def parse_compositions(lines, topics_ignored=[]):
 
     for line in lines[1:]:
         composition = Composition()
+        line = line.replace('\n', '')
         split_line = line.split()
         composition.doc_no = int(split_line[0])
         composition.name = split_line[1].split('/')[-1]

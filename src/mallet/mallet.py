@@ -15,7 +15,7 @@ def import_data(mallet_folder, data_folder, mallet_file, stopwords_file):
     if ' ' in mallet_folder or ' ' in data_folder:
         raise Exception("Folder names should not have any spaces.")
         
-    import_command = mallet_folder + "bin/mallet import-dir --input \"" + data_folder + "\" --output \"" + mallet_file + "\" --keep-sequence --stoplist-file " + stopwords_file
+    import_command = mallet_folder + "bin/mallet import-dir --input " + data_folder + " --output " + mallet_file + " --keep-sequence --stoplist-file " + stopwords_file
     print ("Executing: " + import_command + '\n')
     subprocess.call(import_command.split())
 

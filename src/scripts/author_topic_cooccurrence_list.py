@@ -2,6 +2,7 @@
 Created on Sep 21, 2014
 
 @author: dbhage
+@precondition: author topic table must already have been generated (by running author_topic_table.py script)
 '''
 
 from scripts import author_topic_cooccurrence_list_csv_file, author_topic_csv_file

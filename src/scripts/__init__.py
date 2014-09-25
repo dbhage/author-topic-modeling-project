@@ -6,19 +6,21 @@ Created on Sep 15, 2014
 
 dropbox_folder = "/home/dbhage/Dropbox/PiperLabDeanSharedFolder/"
 
-working_dir = "TopicModels/Trial 6/"
+upper_working_dir = "TopicModels/Trial 7/"
 
-citations_file = dropbox_folder + working_dir + "citations.tsv"
+citations_file = dropbox_folder + upper_working_dir + "citations.tsv"
 
-foreign_topic_remove_csv = dropbox_folder + working_dir + "foreign_topics_remove.csv"
+foreign_topic_remove_csv = dropbox_folder + upper_working_dir + "foreign_topics_remove.csv"
+
+working_dir = upper_working_dir + "1981-2010/"
 
 original_compositions = dropbox_folder + working_dir + "compositions.txt"
 
-working_dir = "TopicModels/Trial 6/1981-2010/"
-
-compositions_file = dropbox_folder + working_dir + "compositions.txt"
+compositions_file = dropbox_folder + working_dir + "compositions_filtered.txt"
 
 author_article_csv_file = dropbox_folder + working_dir + "author_articles.csv"
+
+author_article_csv_file_copy = dropbox_folder + working_dir + "author_articles_copy.csv"
 
 article_topic_csv_file = dropbox_folder + working_dir + "article_topic.csv"
 
@@ -41,3 +43,7 @@ author_topic_beautified = dropbox_folder + working_dir + "author_topic_better_re
 author_topic_table_with_counts_csv_file = dropbox_folder + working_dir + "author_topic_table_with_counts.csv"
 
 author_topic_cooccurrence_list_csv_file = dropbox_folder + working_dir + "author_topic_cooccurrence_list.csv"
+
+node_file = ""
+edge_file = ""
+sum_and_connections_output_file = ""

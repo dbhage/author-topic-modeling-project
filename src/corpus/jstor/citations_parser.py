@@ -30,6 +30,8 @@ def get_citation(line, citation):
     if line is None or line == '' or citation is None:
         return None
     
+    line = line.replace('\n', '')
+    
     try:
         citation_data = line.split('\t')
         citation.id = citation_data[0]

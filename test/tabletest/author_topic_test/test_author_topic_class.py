@@ -2,6 +2,8 @@
 Created on Aug 4, 2014
 
 @author: dbhage
+
+Test table.author_topic.AuthorTopic class
 '''
 
 import unittest
