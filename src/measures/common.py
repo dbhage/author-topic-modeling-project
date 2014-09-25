@@ -2,6 +2,8 @@
 Created on Jul 30, 2014
 
 @author: dbhage
+
+Module containing functions common to measures
 '''
 
 def get_documents_per_author(author_articles):

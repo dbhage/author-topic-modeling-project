@@ -20,10 +20,6 @@ def anr_accuracy(validated_data, generated_data, sig=False):
     @return: string representing the matches
     '''
     
-    raise Exception("NYI")
-    
-    # TODO: adapt to Author
-    
     if validated_data is None or generated_data is None:
         return None
     

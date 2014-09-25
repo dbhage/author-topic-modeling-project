@@ -2,32 +2,25 @@
 Created on Jul 29, 2014
 
 @author: dbhage
+
+Module responsible for purity calculation
 '''
+
 from common import get_documents_per_author
 
 def calculate_purities(author_articles, most_dominant):
     '''
+    Calculate purity 
+    @param author_articles: <article name, author list> dict
+    @param most_dominant: most dominant topics
     @return: dict with author as key and purity as value
     '''
     docs_per_auth = get_documents_per_author(author_articles)
-    
     purity_dict = dict()
     
     for (auth, no_articles_for_author) in docs_per_auth.items():
-        print (auth)
-
-        dominant_topic = most_dominant[auth][0]
-        print ("Dominant Topic: " + str(dominant_topic))
-
         no_articles_with_dominant_topic = most_dominant[auth][1]
-
-        print ("#Articles with dominant topic: " + str(no_articles_with_dominant_topic))
-        print ("#Articles for Author: " + str(no_articles_for_author))
-        
         purity = calculate_purity(no_articles_for_author, no_articles_with_dominant_topic)
-        print ("Purity: " + str(purity))
-        print ("---------------")
-    
         purity_dict[auth] = purity
     
     return purity_dict

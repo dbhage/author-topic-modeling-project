@@ -2,6 +2,8 @@
 Created on Jul 30, 2014
 
 @author: dbhage
+
+Module responsible for calculating entropy
 '''
 
 import math

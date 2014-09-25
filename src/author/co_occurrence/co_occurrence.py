@@ -2,10 +2,13 @@
 Created on Aug 25, 2014
 
 @author: dbhage
+
+Module for generating co-occurrence information
 '''
 
 def get_co_occurrence_list(co_occurrence_dict):
     '''
+    Return co_occurrence dict in list format
     @param co_occurrence_dict: dict with CoOccurrence object as key and weight as value
     @return: list of 3-tuples in this format: (auth1, auth2, weight), where weight = #times auth1 and auth2 co-occur
              in unique articles.
@@ -54,7 +57,9 @@ def list_all_co_occurences(author_list):
     return co_occurrences
 
 class CoOccurrence(object):
-
+    '''
+    CoOccurrence class
+    '''
     def __init__(self, auth1, auth2):
         self.author1 = auth1
         self.author2 = auth2

@@ -2,6 +2,8 @@
 Created on Sep 23, 2014
 
 @author: dbhage
+
+Module to parse mallet generated files into another format
 '''
 
 def keys_to_csv(keys, csv_file_name):

@@ -2,6 +2,8 @@
 Created on Jun 24, 2014
 
 @author: dbhage
+
+Module responsible for getting keys.
 '''
 
 def parse_keys(lines):

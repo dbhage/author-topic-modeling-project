@@ -2,6 +2,8 @@
 Created on Jul 1, 2014
 
 @author: dbhage
+
+Module responsible for getting author topic table.
 '''
 
 import sys

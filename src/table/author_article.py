@@ -2,6 +2,8 @@
 Created on Jun 26, 2014
 
 @author: dbhage
+
+Module responsible for getting author article table
 '''
 
 import re, os, sys

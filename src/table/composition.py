@@ -2,6 +2,8 @@
 Created on Jun 24, 2014
 
 @author: dbhage
+
+Module responsible for getting compositions
 '''
 
 from util.io import get_lines
