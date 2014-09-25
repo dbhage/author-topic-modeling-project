@@ -6,7 +6,7 @@ Created on Sep 15, 2014
 
 from corpus.jstor.citations_parser import get_citations
 from util.io import get_lines
-from scripts import citations_file, compositions_file
+from scripts import citations_file, compositions_file, dropbox_folder, upper_working_dir
 from table.composition import get_compositions, save_compositions_to_file
 from datetime import date
 import time
@@ -37,8 +37,8 @@ for (a_name, composition) in compositions.items():
         second_compo_dict[a_name] = composition
 
 # output both files
-first_compo_txt_file_name = "/home/dbhage/piperlab/compositions_1950-1980.txt"
-second_compo_txt_file_name = "/home/dbhage/piperlab/compositions_1981-2010.txt"
+first_compo_txt_file_name = dropbox_folder + upper_working_dir + "1950-1980/" + "compositions_1950-1980.txt"
+second_compo_txt_file_name = dropbox_folder + upper_working_dir + "1981-2010/" + "compositions_1981-2010.txt"
 
 save_compositions_to_file(first_compo_dict, first_compo_txt_file_name)
 save_compositions_to_file(second_compo_dict, second_compo_txt_file_name)

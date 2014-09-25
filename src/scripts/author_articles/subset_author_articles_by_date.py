@@ -6,7 +6,7 @@ Created on Sep 15, 2014
 
 from corpus.jstor.citations_parser import get_citations
 from util.io import get_lines
-from scripts import citations_file, author_article_csv_file
+from scripts import citations_file, author_article_csv_file, dropbox_folder, upper_working_dir
 from datetime import date
 import time
 from table.author_article import load_author_article_from_file, save_author_articles_to_file
@@ -37,8 +37,8 @@ for (a_name, articles) in author_articles.items():
         second_compo_dict[a_name] = articles
 
 # output both files
-first_compo_txt_file_name = "/home/dbhage/piperlab/author_articles_1950-1980.txt"
-second_compo_txt_file_name = "/home/dbhage/piperlab/author_articles_1981-2010.txt"
+first_compo_txt_file_name = dropbox_folder + upper_working_dir + "1950-1980/author_articles.csv"
+second_compo_txt_file_name = dropbox_folder + upper_working_dir + "1981-2010/author_articles.csv"
 
 save_author_articles_to_file(first_compo_txt_file_name, first_compo_dict)
 save_author_articles_to_file(second_compo_txt_file_name, second_compo_dict)
