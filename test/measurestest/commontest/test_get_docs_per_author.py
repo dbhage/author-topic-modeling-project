@@ -2,6 +2,8 @@
 Created on Aug 6, 2014
 
 @author: dbhage
+
+Test measures.common.get_documents_per_author function.
 '''
 
 import unittest
@@ -72,6 +74,9 @@ class TestGetDocsPerAuthor(unittest.TestCase):
         self.assertDictEqual(actual, expected, "dicts do not match")
     
 class AuthorStub(object):
+    '''
+    Stub for author.author.Author class
+    '''
     def __init__(self, fnames, lnames):
         self.first_names = fnames
         self.last_names = lnames
