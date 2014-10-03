@@ -4,6 +4,8 @@ Created on Sep 7, 2014
 @author: dbhage
 '''
 
+from __future__ import division
+
 def get_node_dict(lines):
     '''
     Get the node dict
@@ -50,7 +52,7 @@ def get_language_sums(node_dict, edge_lines):
         for (src_auth, target_lang) in [(edge[0], node_dict[edge[1]]),(edge[1], node_dict[edge[0]])]:        
 
             if not src_auth in lang_sum_dict:
-                lang_sum_dict[src_auth] = LanguageSum()
+                lang_sum_dict[src_auth] = LanguageSum(node_dict[src_auth])
             
             if target_lang == "english":
                 lang_sum_dict[src_auth].conn_eng += 1
@@ -81,13 +83,70 @@ def parse_edge_line(line):
     return (line[0], line[1], int(line[2]))
 
 class LanguageSum(object):
-    def __init__(self):
+    '''
+    LanguageSum class
+    '''
+    
+    def __init__(self, language):
+        '''
+        Constructor
+        '''
+        self.language = language
         self.sum_eng = 0
         self.sum_fre = 0
         self.sum_ger = 0
         self.conn_eng = 0
         self.conn_fre = 0
         self.conn_ger = 0
+        self.english_lang_percentage = None
+        self.french_lang_percentage = None
+        self.german_lang_percentage = None
+        self.foreign_percentage = None
+    
+    def calculate_language_percentages(self):
+        '''
+        Calculate percentage for each language
+        '''
+        total = self.sum_eng + self.sum_fre + self.sum_ger
+        self.english_lang_percentage = self.sum_eng / total
+        self.french_lang_percentage = self.sum_fre / total
+        self.german_lang_percentage = self.sum_ger / total
+    
+    def calculate_foreign_percentage(self):
+        '''
+        Calculate percentage of hits which are foreign to that particular author
+        '''
+        total = self.sum_eng + self.sum_fre + self.sum_ger
+        
+        if self.language == "english":
+            self.foreign_percentage = (self.sum_fre + self.sum_ger) / total
+        elif self.language == "french":
+            self.foreign_percentage = (self.sum_eng + self.sum_ger) / total
+        elif self.language == "german":
+            self.foreign_percentage = (self.sum_eng + self.sum_fre) / total
+        else:
+            raise Exception("Unknown language")
     
     def __str__(self):
-        return str(self.sum_eng) + ',' + str(self.sum_fre) + ',' + str(self.sum_ger)  + ',' + str(self.conn_eng) + ',' + str(self.conn_fre) + ',' + str(self.conn_ger) + '\n'
+        '''
+        return LanguageSum as a string
+        '''
+        if not self.english_lang_percentage:
+            self.calculate_language_percentages()
+        
+        if not self.foreign_percentage:
+            self.calculate_foreign_percentage()
+        
+        return_string = (self.language + ','
+        + str(self.sum_eng) + ',' 
+        + str(self.sum_fre) + ',' 
+        + str(self.sum_ger)  + ',' 
+        + str(self.conn_eng) + ',' 
+        + str(self.conn_fre) + ','
+        + str(self.conn_ger) + ','
+        + str(self.english_lang_percentage) + ','
+        + str(self.french_lang_percentage) + ','
+        + str(self.german_lang_percentage) + ','
+        + str(self.foreign_percentage) + '\n')
+        
+        return return_string
