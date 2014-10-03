@@ -39,6 +39,17 @@ def get_authors(lines):
 
     return authors
 
+def reverse_author_name(name):
+    author_name = name.split()
+    if len(author_name) == 1:
+        if "novalis" in author_name[0] or "stend" in author_name[0]:
+            author_name = ' ' + author_name[0]
+        else:
+            author_name = author_name[0]
+    else:
+        author_name = author_name[-1] + ' ' + ' '.join([name for name in author_name[:len(author_name)-1]])
+    return author_name
+
 class Author(object):
     
     def __init__(self):
