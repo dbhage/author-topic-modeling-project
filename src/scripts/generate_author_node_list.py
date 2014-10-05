@@ -12,13 +12,14 @@ from author.author import get_authors
 all_lines = dict()
 
 for csv_file in os.listdir(author_node_list_folder):
+    print (csv_file)
     lines = get_lines(author_node_list_folder + csv_file)
     
     if not lines:
         print >> sys.stderr, "Failed to read: " + csv_file
         sys.exit(-1)
 
-    authors = get_authors(lines[1:])
+    authors = get_authors(lines)
 
     if "English" in csv_file:
         all_lines['english'] = authors
