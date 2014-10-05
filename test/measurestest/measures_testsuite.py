@@ -16,6 +16,8 @@ from entropytest.test_entropy_summation import TestEntropySummation
 
 from commontest.test_get_docs_per_author import TestGetDocsPerAuthor
 
+from author_articles_test.calculations_test import TestGetNoOfArticles, TestGetNoOfArticlesWithAtLeastNAuthors, TestGetPercentageOfArticlesWith2Languages, TestGetPercentageOfArticlesWith2Languages2Authors
+
 import unittest
 
 def suite():
@@ -27,7 +29,11 @@ def suite():
                          TestFormulaInsideSum(),
                          TestNoOfDocsWithTopics(),
                          TestEntropySummation(),
-                         TestGetDocsPerAuthor()])
+                         TestGetDocsPerAuthor(),
+                         TestGetNoOfArticles(),
+                         TestGetNoOfArticlesWithAtLeastNAuthors(),
+                         TestGetPercentageOfArticlesWith2Languages(),
+                         TestGetPercentageOfArticlesWith2Languages2Authors()])
 
 if __name__ == '__main__':
     unittest.runner.TextTestRunner(suite()).run()

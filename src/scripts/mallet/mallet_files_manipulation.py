@@ -11,7 +11,7 @@ from util.io import get_lines
 
 no_of_topics = 150
 
-working_dir = "/home/dbhage/Dropbox/PiperLabDeanSharedFolder/TopicModels_Novels/"
+working_dir = "/home/dbhage/Dropbox/PiperLabDeanSharedFolder/TopicModels_Novels/trial3/"
 
 # keys
 keys_file = working_dir + "keys.txt"

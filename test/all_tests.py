@@ -30,6 +30,8 @@ from measurestest.entropytest.test_entropy_summation import TestEntropySummation
 
 from measurestest.commontest.test_get_docs_per_author import TestGetDocsPerAuthor
 
+from measurestest.author_articles_test.calculations_test import TestGetNoOfArticles, TestGetNoOfArticlesWithAtLeastNAuthors, TestGetPercentageOfArticlesWith2Languages, TestGetPercentageOfArticlesWith2Languages2Authors
+
 from tabletest.author_topic_test.test_author_topic_class import TestAuthorTopicClass
 
 def suite():
@@ -40,7 +42,9 @@ def suite():
                     TestArticleAuthorContentAddMention(), TestArticleAuthorContentConstructor(), 
                     TestArticleAuthorContentGetAuthorList(), TestGetValidatedData(), TestFormulaInsideSum(), 
                     TestNoOfDocsWithTopics(), TestEntropySummation(), TestAuthorTopicClass(),
-                    TestGetDocsPerAuthor(), TestListAllCoOccurrences(), TestGetCoOccurrenceDict()])
+                    TestGetDocsPerAuthor(), TestListAllCoOccurrences(), TestGetCoOccurrenceDict(),
+                    TestGetNoOfArticles(), TestGetNoOfArticlesWithAtLeastNAuthors(),
+                    TestGetPercentageOfArticlesWith2Languages(), TestGetPercentageOfArticlesWith2Languages2Authors()])
 
     return suite
 
