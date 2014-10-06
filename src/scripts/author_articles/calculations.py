@@ -23,7 +23,7 @@ A. total number of articles
 B. total number of articles with at least one author
 C. total number of articles with at least two authors
 D. % of articles with two different nationalities
-E. % of articles with at least two authors with 2 different nationalities
+E. % of articles with >=2 languages in the articles having >=2 authors
 '''
 
 from table.author_article import load_author_article_from_file
@@ -46,8 +46,8 @@ author_article_calculation = AuthorArticleCalculation(author_articles, node_dict
 print ("""A. total number of articles: %d
 B. total number of articles with at least one author: %d
 C. total number of articles with at least two authors: %d
-D. %% of articles with two different nationalities: %f
-E. %% of articles with at least two authors with 2 different nationalities: %f
+D. # of articles with >=2 languages / total number of articles: %f
+E. # of articles with >=2 languages / # articles having >=2 authors: %f
 """) % (author_article_calculation.get_no_of_articles(), 
         author_article_calculation.get_no_of_articles_with_atleast_n_authors(1),
         author_article_calculation.get_no_of_articles_with_atleast_n_authors(2),

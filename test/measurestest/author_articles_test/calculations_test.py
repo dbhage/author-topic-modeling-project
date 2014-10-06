@@ -268,8 +268,8 @@ class TestGetPercentageOfArticlesWith2Languages2Authors(unittest.TestCase):
 
         aac = AuthorArticleCalculation1(author_article_dict, language_article_dict)
         actual = aac.get_percentage_articles_with_2_langs_2_auths()
-        expected = .333
-        self.assertAlmostEqual(actual, expected, 3)
+        expected = .5
+        self.assertAlmostEqual(actual, expected, 1)
 
     def test_case4(self):
         '''
@@ -285,8 +285,8 @@ class TestGetPercentageOfArticlesWith2Languages2Authors(unittest.TestCase):
 
         aac = AuthorArticleCalculation1(author_article_dict, language_article_dict)
         actual = aac.get_percentage_articles_with_2_langs_2_auths()
-        expected = .667
-        self.assertAlmostEqual(actual, expected, 3)
+        expected = 1
+        self.assertEqual(actual, expected)
 
 class AuthorArticleCalculation1(AuthorArticleCalculation):
     '''
