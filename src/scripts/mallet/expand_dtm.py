@@ -3,11 +3,12 @@ Created on Sep 29, 2014
 
 @author: dbhage
 
-Expand a document-term matrix into a folder with individual files containing words
+Expand German_DTM_Chunks_1000 document-term matrix into a folder with individual files containing words
 '''
 
 from util.string import replace_uhmlauts
-dtm_file_name = "" #"PATH TO DTM FILE"
+
+dtm_file_name = "PATH TO DTM FILE"
 folder_name = "OUTPUT FOLDER"
 
 with open(dtm_file_name, 'r') as fd:

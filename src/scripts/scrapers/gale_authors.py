@@ -3,9 +3,7 @@ Created on Oct 6, 2014
 
 @author: dbhage
 
-Get author lists HTML from galenet.com
-This script gets the HTML only for all authors (~24000 pages) which can later
-be parsed to get the names only. 
+This script gets the HTML only for all authors (~24000 pages) which can later be parsed to get the names only. 
 '''
 
 import urllib2, socket, time
@@ -18,12 +16,11 @@ url_part_2 = "&secondary=false&u=LitIndex&t=KW&s=6&BO=is&BA=A.D.&DO=is&DA=A.D."
 i=1
 
 while (i <= 237981):
-
     url = url_part_1 + str(i) + url_part_2
     print (str(i) + ' -> ' + url)
 
     # Get a OpenerDirector instance from build_opener function.
-    # Need to use a cookie processor since http cookies must be kept while moving from url to url
+    # Need to use a cookie processor since http cookies must be preserved from request to request
     httpRedirectHandler = urllib2.HTTPRedirectHandler()
     httpCookieProcessor = urllib2.HTTPCookieProcessor()
     opener = urllib2.build_opener(httpRedirectHandler, httpCookieProcessor)
