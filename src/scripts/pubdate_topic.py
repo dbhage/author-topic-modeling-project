@@ -8,13 +8,13 @@ from table.composition import get_compositions
 import sys, time
 from corpus.jstor.citations_parser import get_citations
 from util.io import get_lines
-from scripts import compositions_file, citations_file, pubdate_topic_csv_file
+from scripts import COMPOSITIONS_FNAME, CITATIONS_FILE_FNAME, PUBDATE_TOPIC_CSV_FNAME
 
 print ("Starting:" + str(time.clock()))
 
-compositions = get_compositions(compositions_file)
+compositions = get_compositions(COMPOSITIONS_FNAME)
 
-citations = get_citations(get_lines(citations_file))
+citations = get_citations(get_lines(CITATIONS_FILE_FNAME))
 citations_dict = dict()
 
 for citation in citations:
@@ -22,7 +22,7 @@ for citation in citations:
     citations_dict[new_id] = citation
         
 if compositions:
-    with open(pubdate_topic_csv_file, 'w') as fd:
+    with open(PUBDATE_TOPIC_CSV_FNAME, 'w') as fd:
         fd.write("pub date,main topic\n")
         for (a_name, composition) in compositions.items():
             fd.write(str(citations_dict[a_name].pub_date) + ',' + str(composition.main_topic) + '\n')

@@ -4,16 +4,16 @@ Created on Oct 3, 2014
 @author: dbhage
 '''
 
-from scripts import author_node_list_folder, node_file
+from scripts import AUTHOR_NODE_LIST_FOLDER, NODE_FNAME
 import os, sys
 from util.io import get_lines
 from author.author import get_authors
 
 all_lines = dict()
 
-for csv_file in os.listdir(author_node_list_folder):
+for csv_file in os.listdir(AUTHOR_NODE_LIST_FOLDER):
     print (csv_file)
-    lines = get_lines(author_node_list_folder + csv_file)
+    lines = get_lines(AUTHOR_NODE_LIST_FOLDER + csv_file)
     
     if not lines:
         print >> sys.stderr, "Failed to read: " + csv_file
@@ -29,7 +29,7 @@ for csv_file in os.listdir(author_node_list_folder):
         all_lines['german'] = authors
 
 # output node file
-with open(node_file, 'w') as csv_file:
+with open(NODE_FNAME, 'w') as csv_file:
     csv_file.write("id,label,language\n")
     for (language, authors) in all_lines.items():
         for author in authors:

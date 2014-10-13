@@ -15,16 +15,16 @@ from util.io import get_lines
 no_of_topics = 150
 
 # specify working directory where keys and compositions files generated from mallet are found
-working_dir = "WORKING DIRECTORY"
+WORKING_DIR = "WORKING DIRECTORY"
 
 # parse keys
-keys_file = working_dir + "keys.txt"
+keys_file = WORKING_DIR + "keys.txt"
 keys = parse_keys(get_lines(keys_file))
-csv_file_name = working_dir + "keys.csv"
+csv_file_name = WORKING_DIR + "keys.csv"
 keys_to_csv1(keys, csv_file_name)
 
 # parse compositions
-compositions_file = working_dir + "compositions.txt"
-compositions = get_compositions(compositions_file, [])
-csv_file_name = working_dir + "compositions.csv"
+COMPOSITIONS_FNAME = WORKING_DIR + "compositions.txt"
+compositions = get_compositions(COMPOSITIONS_FNAME, [])
+csv_file_name = WORKING_DIR + "compositions.csv"
 document_topic_matrix(compositions, no_of_topics, csv_file_name)

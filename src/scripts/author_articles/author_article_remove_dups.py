@@ -5,9 +5,9 @@ Created on Sep 24, 2014
 '''
 
 from table.author_article import save_author_articles_to_file, load_author_article_from_file
-from scripts import author_article_csv_file, author_article_csv_file_copy
+from scripts import AUTHOR_ARTICLE_CSV_FNAME, AUTHOR_ARTICLE_CSV_COPY_FNAME
 
-author_articles = load_author_article_from_file(author_article_csv_file)
+author_articles = load_author_article_from_file(AUTHOR_ARTICLE_CSV_FNAME)
 
 new_author_articles = {}
 
@@ -26,4 +26,4 @@ for (k,v) in author_articles.items():
     else:
         new_author_articles[k] = []
     
-save_author_articles_to_file(author_article_csv_file_copy, new_author_articles)
+save_author_articles_to_file(AUTHOR_ARTICLE_CSV_COPY_FNAME, new_author_articles)

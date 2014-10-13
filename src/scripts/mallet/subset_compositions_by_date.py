@@ -6,21 +6,21 @@ Created on Sep 15, 2014
 
 from corpus.jstor.citations_parser import get_citations
 from util.io import get_lines
-from scripts import citations_file, compositions_file, dropbox_folder, upper_working_dir
+from scripts import CITATIONS_FILE_FNAME, COMPOSITIONS_FNAME, DROPBOX_FOLDER, UPPER_WORKING_FOLDER
 from table.composition import get_compositions, save_compositions_to_file
 from datetime import date
 import time
 
 print ("Starting:" + str(time.clock()))
 
-citations = get_citations(get_lines(citations_file))
+citations = get_citations(get_lines(CITATIONS_FILE_FNAME))
 citations_dict = dict()
 
 for citation in citations:
     new_id = "bigrams_" + citation.id.replace('/', '_') + ".txt"
     citations_dict[new_id] = citation
 
-compositions = get_compositions(compositions_file)
+compositions = get_compositions(COMPOSITIONS_FNAME)
 
 first_compo_dict = dict()
 second_compo_dict = dict()
@@ -37,8 +37,8 @@ for (a_name, composition) in compositions.items():
         second_compo_dict[a_name] = composition
 
 # output both files
-first_compo_txt_file_name = dropbox_folder + upper_working_dir + "1950-1980/" + "compositions_1950-1980.txt"
-second_compo_txt_file_name = dropbox_folder + upper_working_dir + "1981-2010/" + "compositions_1981-2010.txt"
+first_compo_txt_file_name = DROPBOX_FOLDER + UPPER_WORKING_FOLDER + "1950-1980/" + "compositions_1950-1980.txt"
+second_compo_txt_file_name = DROPBOX_FOLDER + UPPER_WORKING_FOLDER + "1981-2010/" + "compositions_1981-2010.txt"
 
 save_compositions_to_file(first_compo_dict, first_compo_txt_file_name)
 save_compositions_to_file(second_compo_dict, second_compo_txt_file_name)

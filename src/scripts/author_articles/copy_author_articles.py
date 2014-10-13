@@ -5,6 +5,6 @@ Created on Sep 24, 2014
 '''
 
 from table.author_article import load_author_article_from_file, save_author_articles_to_file
-from scripts import author_article_csv_file, author_article_csv_file_copy
+from scripts import AUTHOR_ARTICLE_CSV_FNAME, AUTHOR_ARTICLE_CSV_COPY_FNAME
 
-save_author_articles_to_file(author_article_csv_file_copy, load_author_article_from_file(author_article_csv_file))
+save_author_articles_to_file(AUTHOR_ARTICLE_CSV_COPY_FNAME, load_author_article_from_file(AUTHOR_ARTICLE_CSV_FNAME))

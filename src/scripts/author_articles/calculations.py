@@ -27,16 +27,16 @@ E. % of articles with >=2 languages in the articles having >=2 authors
 '''
 
 from table.author_article import load_author_article_from_file
-from scripts import author_article_csv_file, node_file
+from scripts import AUTHOR_ARTICLE_CSV_FNAME, NODE_FNAME
 from util.io import get_lines
 from measures.cooccurrence.sum_languages import get_node_dict
 from measures.author_article.calculations import AuthorArticleCalculation
 
 # get author articles
-author_articles = load_author_article_from_file(author_article_csv_file)
+author_articles = load_author_article_from_file(AUTHOR_ARTICLE_CSV_FNAME)
 
 # get node list
-lines = get_lines(node_file)
+lines = get_lines(NODE_FNAME)
 node_dict = get_node_dict(lines)
 
 # perform calculations

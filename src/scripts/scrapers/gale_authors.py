@@ -8,7 +8,7 @@ This script gets the HTML only for all authors (~24000 pages) which can later be
 
 import urllib2, socket, time
 
-working_dir = "WORKING DIRECTORY"
+WORKING_DIR = "WORKING DIRECTORY"
 
 url_part_1 = "http://www.galenet.com/servlet/LitIndex/hits?r=s&origSearch=false&o=DocTitle&n=10&l=8&c="
 url_part_2 = "&secondary=false&u=LitIndex&t=KW&s=6&BO=is&BA=A.D.&DO=is&DA=A.D."
@@ -33,7 +33,7 @@ while (i <= 237981):
     try:
         response = opener.open(url)
         content = response.read()
-        with open(working_dir + "file" + str(i) + ".html", "w") as out_file:
+        with open(WORKING_DIR + "file" + str(i) + ".html", "w") as out_file:
             out_file.write(content)
     except socket.timeout:
         time.sleep(2)
