@@ -4,6 +4,7 @@ Created on Jul 10, 2014
 @author: dbhage
 
 Module to parse citations file in Citation objects
+
 '''
 
 from datetime import date
