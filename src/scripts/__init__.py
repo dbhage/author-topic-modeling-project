@@ -4,7 +4,7 @@ Created on Sep 15, 2014
 @author: dbhage
 '''
 
-DROPBOX_FOLDER = "/home/dbhage/Dropbox/PiperLabDeanSharedFolder/"
+DROPBOX_FOLDER = "/Volumes/Macintosh HD 2/Dropbox/PiperLabDeanSharedFolder/"
 
 AUTHOR_NODE_LIST_FOLDER = DROPBOX_FOLDER + "TopicModels/authors/list/"
 
@@ -25,6 +25,8 @@ ORIGINAL_COMPOSITIONS_FNAME = WORKING_DIR + "compositions.txt"
 COMPOSITIONS_FNAME = WORKING_DIR + "compositions_filtered.txt"
 
 AUTHOR_ARTICLE_CSV_FNAME = WORKING_DIR + "author_articles.csv"
+
+AUTHOR_ARTICLE_MOST_POPULAR_CSV_FNAME = UPPER_WORKING_FOLDER + "author_articles_most_populat_galenet.csv"
 
 AUTHOR_ARTICLE_CSV_COPY_FNAME = WORKING_DIR + "author_articles_copy.csv"
 

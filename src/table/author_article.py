@@ -34,6 +34,39 @@ def get_author_articles(articles_folder, authors, last_name_only_list, bigrams=F
     
     return author_articles
 
+def get_author_articles_most_popular(articles_folder, authors, fd, ignore_list):
+    '''
+    For all articles in the article folder, get the most popular author occurring the article and the number of occurrences
+    
+    @param articles_folder: folder containing articles in text files
+    @type articles_folder: str
+
+    @param authors: list of Author objects
+    @type authors: Author[]
+
+    @param ignore_list: list of words to ignore when generating bigram combos
+    @type ignore_list: str list
+
+    @param fd: file descriptor
+    @type fd: file
+    '''
+    file_names = sorted(os.listdir(articles_folder))
+
+    for article in file_names[7:]:
+        if article == ".DS_Store":
+            continue
+        
+        print (article)
+        
+        article_content = open(articles_folder + article).read()
+        auth_tup = find_authors_popular(authors, article_content, ignore_list)
+        
+        if auth_tup[1] == -1:
+            auth_tup = ("NA", "NA")
+        
+        if fd:
+            fd.write(article + ',' + str(auth_tup[0]) + ',' + str(auth_tup[1]) + '\n')
+
 def load_author_article_from_file(csv_file_name):
     '''
     Load author-article table from csv file in a dict
@@ -119,6 +152,44 @@ def find_authors(authors, article_content, lnaofnp_func, lnp_func, last_name_onl
     
     return matches
 
+def find_authors_popular(authors, article_content, ignore_list):
+    '''
+    Find the most popular author in article and the number of occurrences
+    
+    @param authors: list of AUthor objects
+    @type authors: Author[]
+    
+    @param article_content: string with article content
+    @type article_content: str
+
+    @param ignore_list: list of words to ignore when generating bigram combos
+    @type ignore_list: str list
+     
+    @return: 2-tuple containing author object and count
+    @rtype: tuple(Author,int)
+    '''
+    if authors is None or authors == [] or article_content is None or article_content == "":
+        return []
+    
+    article_content = article_content.lower()  
+
+    most_popular_author = (None, -1)
+
+    for author in authors:
+        
+        count = 0
+        bigram_combos = generate_bigram_combos(author, ignore_list)
+        
+        for bigram_combo in bigram_combos:
+            matches = re.findall(r"\b"+bigram_combo+r"\b", article_content)
+            if matches:
+                count += len(matches)
+                
+        if count > most_popular_author[1]:
+            most_popular_author = (author, count)
+    
+    return most_popular_author
+
 def last_name_present(author, article_content):
     '''
     Find an author's last names in the article
@@ -201,8 +272,25 @@ def name_bigram_present(author, article_content):
     
     return False
 
-def generate_bigram_combos(author):
+def generate_bigram_combos(author, ignore_list):
     '''
+    Generate all bigram combinations for author's name
+    
     @param author: the Author object representing the author whom we want to find the article
+    @type author: Author
+    
+    @param ignore_list: list of words to ignore
+    @type ignore_list: str list
+    
+    @return: list of all possible bigram combinations for this author
+    @rtype: str list
     '''
-    return [author.first_names[0] + ' ' + author.last_names[0]]
+    bigram_combos = []
+    
+    for i in range(0, len(author.first_names)):
+        for j in range(0, len(author.last_names)):
+            if author.first_names[i] in ignore_list or author.last_names[j] in ignore_list:
+                continue
+            bigram_combos.append(author.first_names[i] + ' ' + author.last_names[j])
+ 
+    return bigram_combos
