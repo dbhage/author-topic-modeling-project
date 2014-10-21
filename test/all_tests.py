@@ -34,17 +34,34 @@ from measurestest.author_articles_test.calculations_test import TestGetNoOfArtic
 
 from tabletest.author_topic_test.test_author_topic_class import TestAuthorTopicClass
 
+from tabletest.author_article_test.test_generate_bigram_combos import TestGenerateBigramCombos
+
 def suite():
     suite = unittest.TestSuite()
-    suite.addTests([TestFindDotPattern(), TestFindUpperLowersPattern(), TestExtractAuthorNames(), 
+    
+    suite.addTests([TestFindDotPattern(), 
+                    TestFindUpperLowersPattern(), 
+                    TestExtractAuthorNames(), 
                     TestGetAuthors(), 
-                    TestAuthorArticleFNP(), TestAuthorArticleLNAOFNP(), TestAuthorArticleLNOP(),
-                    TestArticleAuthorContentAddMention(), TestArticleAuthorContentConstructor(), 
-                    TestArticleAuthorContentGetAuthorList(), TestGetValidatedData(), TestFormulaInsideSum(), 
-                    TestNoOfDocsWithTopics(), TestEntropySummation(), TestAuthorTopicClass(),
-                    TestGetDocsPerAuthor(), TestListAllCoOccurrences(), TestGetCoOccurrenceDict(),
-                    TestGetNoOfArticles(), TestGetNoOfArticlesWithAtLeastNAuthors(),
-                    TestGetPercentageOfArticlesWith2Languages(), TestGetPercentageOfArticlesWith2Languages2Authors()])
+                    TestAuthorArticleFNP(), 
+                    TestAuthorArticleLNAOFNP(), 
+                    TestAuthorArticleLNOP(),
+                    TestArticleAuthorContentAddMention(), 
+                    TestArticleAuthorContentConstructor(), 
+                    TestArticleAuthorContentGetAuthorList(), 
+                    TestGetValidatedData(), 
+                    TestFormulaInsideSum(), 
+                    TestNoOfDocsWithTopics(), 
+                    TestEntropySummation(), 
+                    TestAuthorTopicClass(),
+                    TestGetDocsPerAuthor(), 
+                    TestListAllCoOccurrences(), 
+                    TestGetCoOccurrenceDict(),
+                    TestGetNoOfArticles(), 
+                    TestGetNoOfArticlesWithAtLeastNAuthors(),
+                    TestGetPercentageOfArticlesWith2Languages(), 
+                    TestGetPercentageOfArticlesWith2Languages2Authors(),
+                    TestGenerateBigramCombos()])
 
     return suite
 

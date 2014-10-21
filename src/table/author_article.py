@@ -52,7 +52,7 @@ def get_author_articles_most_popular(articles_folder, authors, fd, ignore_list):
     '''
     file_names = sorted(os.listdir(articles_folder))
 
-    for article in file_names[7:]:
+    for article in file_names:
         if article == ".DS_Store":
             continue
         
@@ -285,6 +285,9 @@ def generate_bigram_combos(author, ignore_list):
     @return: list of all possible bigram combinations for this author
     @rtype: str list
     '''
+    if not author or ignore_list is None:
+        raise ValueError("Parameters invalid.");
+    
     bigram_combos = []
     
     for i in range(0, len(author.first_names)):
