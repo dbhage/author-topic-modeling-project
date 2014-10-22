@@ -8,6 +8,7 @@ Parse author names from lines from author file obtained from galenet data
 
 from names import get_name_list
 from author.author import Author
+from util.string import get_longest_string
 
 def get_authors(lines):
     '''
@@ -20,6 +21,13 @@ def get_authors(lines):
     for line in lines:
         author = get_author(line)
         if author:
+            if not author.last_names or not author.first_names:
+                # we only want author names with at least 1 first and last name
+                continue
+            
+            if len(author.last_names) > 1:
+                author.last_names = [get_longest_string(author.last_names)]
+            
             authors.append(author)
     
     return authors
