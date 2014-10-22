@@ -6,66 +6,8 @@ Created on Jun 26, 2014
 Module responsible for getting author article table
 '''
 
-import re, os, sys
+import re, sys
 from author.author import Author
-
-def get_author_articles(articles_folder, authors, last_name_only_list, bigrams=False):
-    '''
-    Get author-article table in the form of a dict
-    @param articles_folder: folder containing articles in text files
-    @param authors: list of Author objects
-    @param last_name_only_list: list of authors for whom we can only search the last name
-    @param num: int for number of files. if < 0 or > no of articles in article_folder, all article files are used
-    @return: dict with article name as key and list of authors present in that article as value
-    '''
-    file_names = sorted(os.listdir(articles_folder))
-
-    author_articles = dict()
-    
-    for article in file_names:
-        article_content = open(articles_folder + article).read()
-        
-        if not bigrams:
-            auths = find_authors(authors, article_content, last_name_and_one_first_name_present, last_name_present, last_name_only_list)
-        else:
-            auths = find_authors(authors, article_content, name_bigram_present, last_name_present, last_name_only_list)
-
-        author_articles[article] = auths
-    
-    return author_articles
-
-def get_author_articles_most_popular(articles_folder, authors, fd, ignore_list):
-    '''
-    For all articles in the article folder, get the most popular author occurring the article and the number of occurrences
-    
-    @param articles_folder: folder containing articles in text files
-    @type articles_folder: str
-
-    @param authors: list of Author objects
-    @type authors: Author[]
-
-    @param ignore_list: list of words to ignore when generating bigram combos
-    @type ignore_list: str list
-
-    @param fd: file descriptor
-    @type fd: file
-    '''
-    file_names = sorted(os.listdir(articles_folder))
-
-    for article in file_names:
-        if article == ".DS_Store":
-            continue
-        
-        print (article)
-        
-        article_content = open(articles_folder + article).read()
-        auth_tup = find_authors_popular(authors, article_content, ignore_list)
-        
-        if auth_tup[1] == -1:
-            auth_tup = ("NA", "NA")
-        
-        if fd:
-            fd.write(article + ',' + str(auth_tup[0]) + ',' + str(auth_tup[1]) + '\n')
 
 def load_author_article_from_file(csv_file_name):
     '''
@@ -181,7 +123,7 @@ def find_authors_popular(authors, article_content, ignore_list):
         bigram_combos = generate_bigram_combos(author, ignore_list)
         
         for bigram_combo in bigram_combos:
-            matches = re.findall(r"\b"+bigram_combo+r"\b", article_content)
+            matches = re.findall(r"\b" + re.escape(bigram_combo) + r"\b", article_content)
             if matches:
                 count += len(matches)
                 
@@ -254,20 +196,32 @@ def full_name_present(author, article_content):
     
     return count_last == len(author.last_names) and count_first == len(author.first_names)
 
-def name_bigram_present(author, article_content):
+def name_bigram_present(bigram_combos, article_content):
     '''
     Find an author's name in the article by looking for first name and last name bigram combos
-    @param author: the Author object representing the author whom we want to find the article
+
+    @param bigram_combos: list of bigram combinations
+    @type bigram_combos: str list
+
     @param article_content: the string with the article content
+    @type article_content: str
+
     @return: True if any bigram combos of name present for that particular author is found in the article, False otherwise
+    @rtype: boolean
+    
+    @raise ValueError: if parameter(s) invalid
     '''
-    try:
-        bigram_combos = generate_bigram_combos(author)
-    except IndexError:
+    if bigram_combos is None:
+        raise ValueError("Bigram Combos invalid")
+        
+    if not article_content:
+        raise ValueError("article content invalid")
+    
+    if not bigram_combos:
         return False
     
     for bigram_combo in bigram_combos:
-        if re.search(bigram_combo, article_content):
+        if re.search(r"\b" + re.escape(bigram_combo) + r"\b", article_content):
             return True
     
     return False
@@ -297,3 +251,29 @@ def generate_bigram_combos(author, ignore_list):
             bigram_combos.append(author.first_names[i] + ' ' + author.last_names[j])
  
     return bigram_combos
+
+def get_last_name_count(article_content, last_name):
+    '''
+    @param article_content: the content of the article
+    @type article_content: str
+    
+    @param last_name: author's last name
+    @type last_name: str
+    
+    @return: number of matches for last name in article content
+    @rtype: int
+    
+    @raise ValueError: if parameters are invalid
+    '''
+    if not article_content:
+        raise ValueError("article content invalid")
+    
+    if not last_name:
+        raise ValueError("last name invalid")
+        
+    matches = re.findall(r"\b" + re.escape(last_name) + r"\b", article_content)
+    
+    if matches:
+        return len(matches)
+    
+    return 0
