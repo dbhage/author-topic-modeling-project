@@ -27,14 +27,13 @@ from measurestest.anr_test.test_get_validated_data import TestGetValidatedData
 from measurestest.entropytest.test_formula_inside_sum import TestFormulaInsideSum
 from measurestest.entropytest.test_no_docs_with_topics import TestNoOfDocsWithTopics
 from measurestest.entropytest.test_entropy_summation import TestEntropySummation
-
 from measurestest.commontest.test_get_docs_per_author import TestGetDocsPerAuthor
-
 from measurestest.author_articles_test.calculations_test import TestGetNoOfArticles, TestGetNoOfArticlesWithAtLeastNAuthors, TestGetPercentageOfArticlesWith2Languages, TestGetPercentageOfArticlesWith2Languages2Authors
 
 from tabletest.author_topic_test.test_author_topic_class import TestAuthorTopicClass
-
 from tabletest.author_article_test.test_generate_bigram_combos import TestGenerateBigramCombos
+from tabletest.author_article_test.test_get_last_name_count import TestGetLastNameCount
+from tabletest.author_article_test.test_name_bigram_present import TestNameBigramPresent
 
 def suite():
     suite = unittest.TestSuite()
@@ -61,7 +60,9 @@ def suite():
                     TestGetNoOfArticlesWithAtLeastNAuthors(),
                     TestGetPercentageOfArticlesWith2Languages(), 
                     TestGetPercentageOfArticlesWith2Languages2Authors(),
-                    TestGenerateBigramCombos()])
+                    TestGenerateBigramCombos(),
+                    TestGetLastNameCount(),
+                    TestNameBigramPresent()])
 
     return suite
 
