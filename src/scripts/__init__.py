@@ -4,6 +4,8 @@ Created on Sep 15, 2014
 @author: dbhage
 '''
 
+ARTICLES_FOLDER = "/Volumes/New HD/data/Lang_Lit_Lang_Lit_Bigrams/bigrams_expanded/"
+
 DROPBOX_FOLDER = "/Volumes/Macintosh HD 2/Dropbox/PiperLabDeanSharedFolder/"
 
 AUTHOR_NODE_LIST_FOLDER = DROPBOX_FOLDER + "TopicModels/authors/list/"
@@ -12,7 +14,7 @@ GALENET_AUTHOR_MASTER_LIST_FNAME = AUTHOR_NODE_LIST_FOLDER + "galenet_author_mas
 
 UPPER_WORKING_FOLDER = DROPBOX_FOLDER + "TopicModels/Trial 7/"
 
-CITATIONS_FILE_FNAME = UPPER_WORKING_FOLDER + "citations.tsv"
+CITATIONS_FILE_FNAME = UPPER_WORKING_FOLDER + "citations.csv"
 
 JOURNAL_LIST_FILE_NAME = UPPER_WORKING_FOLDER + "journal_list.txt"
 
@@ -36,7 +38,7 @@ ARTICLE_COPY_CSV_FNAME = WORKING_DIR + "article_topic.csv"
 
 ENTROPIES_CSV_FNAME = WORKING_DIR + "entropies.csv"
 
-COOCCURRENCE_LIST_FNAME = WORKING_DIR + "COOCCURRENCE_LIST_FNAME.csv"
+COOCCURRENCE_LIST_FNAME = WORKING_DIR + "cooccurrence_list.csv"
 
 AUTHOR_DATE_CSV_FNAME = WORKING_DIR + "author_date.csv"
 
@@ -60,3 +62,6 @@ NODE_FNAME = UPPER_WORKING_FOLDER + "Author_Topic_Nodelist.csv"
 EDGE_FNAME = WORKING_DIR + "Author_Cooccurrence_EdgeList_Plus10.csv"
 
 SUM_AND_CONNECTIONS_OUTPUT_FNAME = WORKING_DIR + "sum_and_connections.csv"
+
+# keywords data subset by year
+KEYWORDS_OUTPUT_FILE = UPPER_WORKING_FOLDER + "keywords.csv"

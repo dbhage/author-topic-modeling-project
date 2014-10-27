@@ -10,13 +10,42 @@ Module to parse citations file in Citation objects
 from datetime import date
 import re
 
+def get_citations_as_dict(lines):
+    '''
+    Get citations as a python dict
+
+    @param lines: the lines from the citations tsv file
+    @type lines: str list
+    
+    @return: dict with file name as key and Citation object as value
+    @rtype: dict<str,Citation>
+    '''
+    if not lines:
+        return {}
+    
+    # get citations as list
+    citations = get_citations(lines)
+    
+    # make a dict out of list, while changing the ids to text file names
+    citations_dict = dict()
+    
+    for citation in citations:
+        new_id = "bigrams_" + citation.id.replace('/', '_') + ".txt"
+        citations_dict[new_id] = citation
+    
+    return citations_dict
+
 def get_citations(lines):
     '''
     Get citations list
+
     @param lines: lines from citations csv file
+    @type lines: str list
+    
     @return: list of Citation objects
+    @rtype: Citation list
     '''
-    if lines is None or lines == []:
+    if not lines:
         return []
 
     citations = []
@@ -30,7 +59,7 @@ def get_citations(lines):
     return citations
 
 def get_citation(line, citation):
-    if line is None or line == '' or citation is None:
+    if not line or citation is None:
         return None
     
     line = line.replace('\n', '')
@@ -53,7 +82,7 @@ def get_citation(line, citation):
 
 class Citation(object):
     '''
-    Citation class
+    Citation data structure
     '''
     def __init__(self):
         '''
@@ -75,8 +104,11 @@ class Citation(object):
     def set_pub_date(self, date_str):
         '''
         Set the publication date using a string
+        
         @param date_str: the string containing the date in YYYY-MM-DD format.
-        @precondition: self.pub_date must exist
+        @type param: str
+        
+        @postcondition: self.pub_date is set
         '''
         if date_str:
             date_str = re.search(r"[0-9]{4,4}-[0-9]{2,2}-[0-9]{2,2}", date_str)
@@ -84,3 +116,14 @@ class Citation(object):
                 date_str = date_str.group(0)
                 date_str = date_str.split('-')
                 self.pub_date = date(int(date_str[0]), int(date_str[1]), int(date_str[2]))
+    
+    def get_year(self):
+        '''
+        Get year for this citation
+        
+        @precondition: self.pub_date must have been set (set_pub_date must have been called)
+        
+        @return: year
+        @rtype: int
+        '''
+        return self.pub_date.year    
