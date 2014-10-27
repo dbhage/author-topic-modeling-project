@@ -23,6 +23,7 @@ from corpus.jstor.citations_parser import get_citations_as_dict
 from scripts import CITATIONS_FILE_FNAME, ARTICLES_FOLDER, KEYWORDS_OUTPUT_FILE
 from util.io import get_lines
 import os, re
+from measures.keyword_article.keyword_article import KeywordArticle
 
 # get citations
 citations = get_citations_as_dict(get_lines(CITATIONS_FILE_FNAME))
@@ -56,11 +57,7 @@ for fname in fnames:
     print (" -> " + str(year))
     
     if not year in master_dict:
-        # set counts to 0 for all keywords
-        keyword_dict = {k : 0 for k in keywords_list}
-        # set of tokens empty
-        keyword_dict["tokens"] = set()
-        master_dict[year] = keyword_dict
+        master_dict[year] = KeywordArticle(keywords_list, year)
     
     # get content
     with open(ARTICLES_FOLDER + fname, 'r') as fd:
@@ -70,19 +67,20 @@ for fname in fnames:
     for (keyword, regex) in regex_dict.items():
         matches = re.findall(regex, content)
         if matches:
-            master_dict[year][keyword] += len(matches)
+            master_dict[year].add_to_keyword(keyword, len(matches))
     
     # merge the set of tokens we have for that year with the tokens from the current article
-    master_dict[year]["tokens"] |= set(content.split(' '))    
+    master_dict[year].add_to_tokens(content.split(' '))    
+    
+    # increment # articles
+    master_dict[year].no_of_articles += 1
 
 # divide keywords occurrences by #tokens
 print ("divide keywords occurrences by #tokens")
 
-for keyword_dict in master_dict.values():
-    for word in keywords_list:
-        keyword_dict[word] /= float(len(keyword_dict["tokens"]))
-    del keyword_dict["tokens"] # we don't need this anymore
-
+for keyword_article in master_dict.values():
+    keyword_article.normalize()
+    
 # output to file
 print ("output to file")
 
@@ -91,15 +89,7 @@ with open(KEYWORDS_OUTPUT_FILE, 'w') as fd:
     fd.write('year/keyword,' + ','.join(keywords_list) + '\n')
     
     # write rows
-    for (year, keyword_dict) in master_dict.items():
-        fd.write(str(year) + ',')
-        
-        for i,keyword in enumerate(keywords_list):
-            fd.write(str(keyword_dict[keyword]))
-            if i < len(keywords_list) - 1:
-                # not last
-                fd.write(',')
-            else:
-                fd.write('\n')
+    for keyword_article in master_dict.values():
+        fd.write(str(keyword_article))
 
 print ("Done outputting to:" + KEYWORDS_OUTPUT_FILE)
