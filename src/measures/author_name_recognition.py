@@ -4,6 +4,8 @@ Created on Jul 16, 2014
 @author: dbhage
 
 Module to measure author name recognition accuracy
+
+@deprecated: Use measures.author_article's accuracy module.
 '''
 
 import re

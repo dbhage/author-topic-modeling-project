@@ -4,11 +4,20 @@ Created on Sep 15, 2014
 @author: dbhage
 '''
 
+HOME = True
+
 ARTICLES_FOLDER = "/Volumes/New HD/data/Lang_Lit_Lang_Lit_Bigrams/bigrams_expanded/"
 
-DROPBOX_FOLDER = "/Volumes/Macintosh HD 2/Dropbox/PiperLabDeanSharedFolder/"
+if HOME:
+    DROPBOX_FOLDER = "/home/dbhage/Dropbox/PiperLabDeanSharedFolder/"
+else:
+    DROPBOX_FOLDER = "/Volumes/Macintosh HD 2/Dropbox/PiperLabDeanSharedFolder/"
 
 AUTHOR_NODE_LIST_FOLDER = DROPBOX_FOLDER + "TopicModels/authors/list/"
+
+AUTHOR_MASTER_LIST_CSV_FNAME = "PATH TO AUTHOR MASTER LIST"
+
+AA_BIGRAM_VALIDATION_FILE = "PATH TO VALIDATION LIST"
 
 GALENET_AUTHOR_MASTER_LIST_FNAME = AUTHOR_NODE_LIST_FOLDER + "galenet_author_master_list.txt"
 
