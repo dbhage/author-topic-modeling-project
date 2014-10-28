@@ -8,7 +8,7 @@ Measure precision and recall for author articles using the validation sample pro
 
 from table.author_article import load_author_article_from_file
 from scripts import AUTHOR_ARTICLE_CSV_FNAME, AUTHOR_MASTER_LIST_CSV_FNAME, AA_BIGRAM_VALIDATION_FILE
-from measures.relevance_scores import precision, recall
+from measures.relevance_scores import precision, recall, accuracy
 from measures.author_article.accuracy import measure_sns
 from author.names import extract_author_names
 from author.author import Author, get_authors
@@ -62,13 +62,19 @@ print ("Unrecognized Authors: " + ','.join([str(auth) for auth in non_existing_a
 print ("------")
 
 # measure precision and recall
-(tp, fp, fn) = measure_sns(actual_author_articles, expected_author_articles)
+(tp, fp, fn, tn) = measure_sns(actual_author_articles, expected_author_articles, author_list)
+
+print ("tp,fp,fn,tn:" + str((tp, fp, fn, tn)))
 
 precision_value = precision(tp, fp)
 recall_value = recall(tp, fn)
+accuracy_value = accuracy(tp, tn, fp, fn)
 
 print ("Precision: "),
 print (precision_value)
 
 print ("Recall: "),
 print (recall_value)
+
+print ("Accuracy Value: "),
+print (accuracy_value)
