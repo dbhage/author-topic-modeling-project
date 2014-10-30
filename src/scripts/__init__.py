@@ -2,11 +2,16 @@
 Created on Sep 15, 2014
 
 @author: dbhage
+
+Hard coded file or folder names to be used in the scripts. 
+
+Keep all paths here so that when we run on different corpora, we don't need
+to modify the scripts.
 '''
 
-HOME = True
-
 ARTICLES_FOLDER = "/Volumes/New HD/data/Lang_Lit_Lang_Lit_Bigrams/bigrams_expanded/"
+
+HOME = True
 
 if HOME:
     DROPBOX_FOLDER = "/home/dbhage/Dropbox/PiperLabDeanSharedFolder/"
