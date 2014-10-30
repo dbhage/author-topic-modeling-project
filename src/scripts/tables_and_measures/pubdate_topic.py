@@ -2,6 +2,8 @@
 Created on Aug 14, 2014
 
 @author: dbhage
+
+Script to generate a table of publication dates and topics
 '''
 
 from table.composition import get_compositions
@@ -25,7 +27,8 @@ if compositions:
     with open(PUBDATE_TOPIC_CSV_FNAME, 'w') as fd:
         fd.write("pub date,main topic\n")
         for (a_name, composition) in compositions.items():
-            fd.write(str(citations_dict[a_name].pub_date) + ',' + str(composition.main_topic) + '\n')
+            for main_topic in composition.main_topics:
+                fd.write(str(citations_dict[a_name].pub_date) + ',' + str(main_topic) + '\n')
 else:
     print >> sys.stderr, "Compositions None"
 

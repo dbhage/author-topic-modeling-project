@@ -34,6 +34,7 @@ from tabletest.author_topic_test.test_author_topic_class import TestAuthorTopicC
 from tabletest.author_article_test.test_generate_bigram_combos import TestGenerateBigramCombos
 from tabletest.author_article_test.test_get_last_name_count import TestGetLastNameCount
 from tabletest.author_article_test.test_name_bigram_present import TestNameBigramPresent
+from tabletest.composition_test.test_parse_composition import TestParseComposition
 
 def suite():
     suite = unittest.TestSuite()
@@ -62,7 +63,8 @@ def suite():
                     TestGetPercentageOfArticlesWith2Languages2Authors(),
                     TestGenerateBigramCombos(),
                     TestGetLastNameCount(),
-                    TestNameBigramPresent()])
+                    TestNameBigramPresent(),
+                    TestParseComposition()])
 
     return suite
 

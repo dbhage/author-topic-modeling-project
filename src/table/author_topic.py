@@ -11,8 +11,13 @@ import sys
 def author_topic_table(compositions, author_articles):
     '''
     Produce an author-topic table based on compositions and author article data
+    
     @param compositions: dict with article name as key and composition object as value
+    @type compositions: dict<str, Composition>
+    
     @param author_articles: dict with article name as key and author names list as value
+    @type author_articles: dict<str, str list>
+    
     @return: list of AuthorTopic objects
     '''
     if compositions is None or author_articles is None:
@@ -22,8 +27,9 @@ def author_topic_table(compositions, author_articles):
     
     for article in compositions.keys():
         for author in author_articles[article]:
-            author_topic = AuthorTopic(author, compositions[article].main_topic)
-            author_topics.append(author_topic)
+            for main_topic in compositions[article].main_topics:
+                author_topic = AuthorTopic(author, main_topic)
+                author_topics.append(author_topic)
     
     return author_topics
 
