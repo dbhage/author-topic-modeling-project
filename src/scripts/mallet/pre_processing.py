@@ -4,6 +4,8 @@ Created on Oct 30, 2014
 @author: dbhage
 
 Script to preprocess corpus before using mallet topic modeler.
+
+Requires pycelex-phonology (https://github.com/dbhage/pycelex-phonology)
 '''
 
 import os, sys
@@ -36,7 +38,6 @@ def expand_file(fname, english_words):
                 line = line.split(',')
                 
                 bigram = line[0].split()
-                words = []
                 
                 # get the words in the bigram
                 # only those words which are in the english words dictionary will be output
@@ -45,20 +46,16 @@ def expand_file(fname, english_words):
                 for word in bigram:
                     word = word.lower()
                     if word in english_words:
-                        words.append(word)
+                        text += (word + ' ') * int(line[1])
                     else:
                         current_non_english_words.add(word)
                 
-                words = ' '.join(words)
-                
-                # add valid words to text the number of times they occur
-                text += (words + ' ') * int(line[1])
-
-        return (text,current_non_english_words)
+        return (text, current_non_english_words)
     
     except IOError:
         print >> sys.stderr, "IOError while reading file: " + fname
         return None
+
 
 # get the dictionary
 english_words = build_celex(DROPBOX_FOLDER + "celex2/", 0, 0)
