@@ -110,12 +110,10 @@ class Citation(object):
         
         @postcondition: self.pub_date is set
         '''
-        if date_str:
-            date_str = re.search(r"[0-9]{4,4}-[0-9]{2,2}-[0-9]{2,2}", date_str)
-            if date_str:
-                date_str = date_str.group(0)
-                date_str = date_str.split('-')
-                self.pub_date = date(int(date_str[0]), int(date_str[1]), int(date_str[2]))
+        date_str = re.search(r"[0-9]{4,4}-[0-9]{2,2}-[0-9]{2,2}", date_str)
+        date_str = date_str.group(0)
+        date_str = date_str.split('-')
+        self.pub_date = date(int(date_str[0]), int(date_str[1]), int(date_str[2]))
     
     def get_year(self):
         '''

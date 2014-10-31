@@ -9,9 +9,11 @@ Keep all paths here so that when we run on different corpora, we don't need
 to modify the scripts.
 '''
 
-ARTICLES_FOLDER = "/Volumes/New HD/data/Lang_Lit_Lang_Lit_Bigrams/bigrams_expanded/"
+ARTICLES_MAIN_DIR = "/Volumes/New HD/data/Lang_Lit_Lang_Lit_Bigrams/"
 
-HOME = True
+ARTICLES_FOLDER = ARTICLES_MAIN_DIR + "bigrams_expanded/"
+
+HOME = False
 
 if HOME:
     DROPBOX_FOLDER = "/home/dbhage/Dropbox/PiperLabDeanSharedFolder/"
@@ -79,3 +81,6 @@ SUM_AND_CONNECTIONS_OUTPUT_FNAME = WORKING_DIR + "sum_and_connections.csv"
 
 # keywords data subset by year
 KEYWORDS_OUTPUT_FILE = UPPER_WORKING_FOLDER + "keywords.csv"
+
+# article pubdate table
+ARTICLE_PUBDATE_FNAME = UPPER_WORKING_FOLDER + "article_pubdate.csv"
