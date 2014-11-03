@@ -6,7 +6,7 @@ Created on Sep 7, 2014
 
 from measures.cooccurrence.sum_languages import get_node_dict, get_language_sums
 from util.io import get_lines
-from scripts import SUM_AND_CONNECTIONS_OUTPUT_FNAME, NODE_FNAME, EDGE_FNAME
+from scripts import SUM_AND_CONNECTIONS_OUTPUT_FNAME, NODE_FNAME, AUTHOR_COOCCURRENCE_EDGE_LIST_PLUS10 as EDGE_FNAME
 import time
 
 print ("Starting:" + str(time.clock()))

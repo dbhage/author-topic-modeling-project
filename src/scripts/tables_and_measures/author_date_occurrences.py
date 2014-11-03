@@ -17,7 +17,7 @@ print ("Starting: " + str(time.clock()))
 author_articles = load_author_article_from_file(AUTHOR_ARTICLE_CSV_FNAME)
 
 # citations
-citations = get_citations(get_lines(CITATIONS_FILE_FNAME))
+citations = get_citations(get_lines(CITATIONS_FILE_FNAME)[1:])
 citations_dict = dict()
 
 for citation in citations:

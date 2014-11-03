@@ -12,7 +12,7 @@ from table.composition import get_compositions
 from util.io import get_lines
 
 # number of topics
-no_of_topics = 150
+no_of_topics = None # specify an int for no of topics
 
 # specify working directory where keys and compositions files generated from mallet are found
 WORKING_DIR = "WORKING DIRECTORY"

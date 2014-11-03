@@ -86,8 +86,11 @@ def parse_composition(line, topic_threshold, proximity_threshold):
     composition.name = split_line[1].split('/')[-1]
 
     # add main topic to composition
-    main_topic = int(split_line[2])
-    main_topic_proportion = float(split_line[3])
+    try:
+        main_topic = int(split_line[2])
+        main_topic_proportion = float(split_line[3])
+    except IndexError:
+        return composition
     
     if main_topic_proportion < topic_threshold:
         return composition

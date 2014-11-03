@@ -9,7 +9,7 @@ Any article can have 0 or more main topics.
 '''
 
 from table.composition import get_compositions
-from scripts import ARTICLE_COPY_CSV_FNAME, COMPOSITIONS_FNAME
+from scripts import ARTICLE_TOPIC_CSV_FNAME, COMPOSITIONS_FNAME
 import sys, time
 
 print ("Starting:" + str(time.clock()))
@@ -17,7 +17,7 @@ print ("Starting:" + str(time.clock()))
 compositions = get_compositions(COMPOSITIONS_FNAME)
 
 if compositions:
-    with open(ARTICLE_COPY_CSV_FNAME, 'w') as fd:
+    with open(ARTICLE_TOPIC_CSV_FNAME, 'w') as fd:
         fd.write("article name,main topic\n")
         for (a_name, composition) in compositions.items():
             for main_topic in composition.main_topics:
