@@ -7,15 +7,17 @@ Detect languages in text using stop words.
 '''
 
 from nltk import wordpunct_tokenize
-from nltk.corpus import stopwords
 from util.string import to_lower
 
-def count_stopwords(text):
+def count_stopwords(text, stopword_dict):
     '''
     Count stopwords in text
 
     @param text: text
     @type text: string
+
+    @param stopword_dict: dict with lnaguage as key and stopword set as value
+    @type stopword_dict: dict<str, set<str>>
 
     @return: languages and their stopword counts found in the text
     @rtype: dict
@@ -25,10 +27,8 @@ def count_stopwords(text):
     tokens = wordpunct_tokenize(text)
     words = map(to_lower, tokens)
 
-    for language in stopwords.fileids():
+    for (language, stopwords_set) in stopword_dict.items():
 
-        stopwords_set = set(stopwords.words(language))
-        
         count = 0
         for word in words:
             if word in stopwords_set:
@@ -40,7 +40,7 @@ def count_stopwords(text):
 
 def percentage_stopwords(languages):
     '''
-    Get percentages+
+    Get percentages
     
     @param languages: languages and counts
     @type languages: dict
@@ -76,3 +76,33 @@ def detect_languages(text, count_stopwords_func, percentage_stopwords_func, thre
     '''
     languages_dict = percentage_stopwords_func(count_stopwords_func(text))
     return [k for (k,v) in languages_dict.items() if v > threshold]
+
+def stopword_proportion_per_language(stopword_dict, text):
+    '''
+    for each language, get the fraction of stopwords which are found in the text
+    
+    @param stopword_dict: dict with language as key and stop words as values
+    @type stopword_dict: dict<str,set<str>>
+    
+    @param text: text
+    @type text: str
+    
+    @return: dict with language as key and proportion as value
+    @rtype: dict<str, float> 
+    '''
+    tokens = wordpunct_tokenize(text)
+    words = map(to_lower, tokens)
+    
+    proportion_dict = {}
+    
+    for (language, stopword_list) in stopword_dict.items():
+        
+        found = set()
+        
+        for word in words:
+            if word in stopword_list:
+                found.add(word)
+        
+        proportion_dict[language] = float(len(found)) / len(stopword_list)
+
+    return proportion_dict
